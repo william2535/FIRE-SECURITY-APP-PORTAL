@@ -104,3 +104,9 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 .app-card.findr .findr-online a.unstable-link{display:inline-block;min-height:0;padding:8px 10px;border:1px solid #bd9e3a;border-radius:6px;background:transparent;color:#ffe274;font-size:10px;font-weight:800;text-decoration:none;text-align:center}
 .app-card.findr .findr-online p{grid-column:1/-1;margin:0;font-size:11px;color:#a5b4c0}
 @media(max-width:440px){.app-card.findr .findr-online{grid-template-columns:1fr}.app-card.findr .findr-online a.unstable-link{justify-self:start}}
+
+
+/* FINDR final fix: banner artwork occupies the entire link, no coloured backing */
+.app-card.findr .app-actions>a.findr-banner-link{display:block!important;position:relative!important;width:100%!important;max-width:100%!important;aspect-ratio:740/160!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0!important;border:0!important;border-radius:14px!important;background:none!important;background-color:transparent!important;box-shadow:0 5px 17px #ffda303d!important;overflow:hidden!important;line-height:0!important;animation:none!important}
+.app-card.findr .app-actions>a.findr-banner-link>svg{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;margin:0!important;padding:0!important}
+.app-card.findr .app-actions>a.findr-banner-link::before{display:none!important}
