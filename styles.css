@@ -85,20 +85,22 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 @media(prefers-reduced-motion:reduce){.app-card.zone .zone-banner-link::after{animation:none!important}}
 
 
-/* FINDR yellow Play banner: same dimensions and shine as Zone Sketch */
-.app-card.findr .app-actions .btn.findr-banner-link{display:block!important;position:relative!important;overflow:hidden!important;width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:740/160!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;border-radius:14px!important;box-shadow:0 5px 17px #ffda303d!important;line-height:0!important;animation:none!important;isolation:isolate!important}
+/* FINDR: exact clone of Zone Sketch banner sizing with yellow glow */
+/* Compact premium illustrated Google Play banner, preserving original aspect ratio */
+.app-card.findr .app-actions .btn.findr-banner-link{display:block!important;position:relative!important;overflow:hidden!important;width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:740/160!important;margin:0 auto!important;padding:0!important;background:transparent!important;border:0!important;border-radius:14px!important;box-shadow:0 5px 17px #ffdc393d!important;line-height:0!important;animation:none!important;isolation:isolate!important}
 .app-card.findr .findr-banner-link::before{content:none!important}
 .app-card.findr .findr-banner-link::after{content:""!important;position:absolute!important;z-index:2!important;top:-60%!important;bottom:-60%!important;left:-40%!important;right:auto!important;width:16%!important;height:auto!important;background:linear-gradient(90deg,transparent,#ffffffa8,transparent)!important;filter:blur(6px)!important;transform:skewX(-20deg)!important;animation:zoneBannerSweep 5s ease-in-out infinite!important;pointer-events:none!important}
-.app-card.findr .zone-play-banner{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important}
-.app-card.findr .findr-banner-link:hover{transform:translateY(-2px)!important;box-shadow:0 8px 23px #ffe04170!important}
-.findr-online{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px 10px;align-items:center;margin-top:15px;padding-top:15px;border-top:1px solid #5c4d23}.findr-online strong{display:block;color:#f9f5e6;font-size:13px}.findr-online div span{display:block;font-size:11px;color:#acb9c5}.findr-online a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 12px;border:1px solid #e5bd39;border-radius:8px;background:#1d1a0d;color:#ffdf54;text-align:center;text-decoration:none;font-size:10px;font-weight:850;letter-spacing:.02em}.findr-online a:hover{background:#342b0d}.findr-online p{grid-column:1/-1;margin:0;color:#a5b4c0;font-size:11px}
-@media(max-width:440px){.findr-online{grid-template-columns:1fr}.findr-online a{justify-self:stretch}.findr-online p{grid-column:1}}
+.app-card.findr .zone-play-banner{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;overflow:visible!important}
+.app-card.findr .findr-banner-link:hover{transform:translateY(-2px)!important;box-shadow:0 8px 23px #ffdc3966!important}
+@keyframes zoneBannerSweep{0%,22%{left:-40%}50%,100%{left:135%}}
 @media(prefers-reduced-motion:reduce){.app-card.findr .findr-banner-link::after{animation:none!important}}
 
 
-/* FINDR banner size repair: identical geometry to the Zone Sketch banner */
-.app-card.findr .app-actions>a.findr-banner-link{box-sizing:border-box!important;display:block!important;position:relative!important;overflow:hidden!important;width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:740/160!important;padding:0!important;margin:0!important;border:0!important;border-radius:14px!important;background:transparent!important;line-height:0!important;box-shadow:0 5px 17px #ffda303d!important;isolation:isolate!important}
-.app-card.findr .app-actions>a.findr-banner-link>svg.zone-play-banner{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;aspect-ratio:740/160!important;object-fit:contain!important;overflow:hidden!important}
-.app-card.findr .app-actions>a.findr-banner-link::before{content:none!important}
-.app-card.findr .app-actions>a.findr-banner-link::after{content:""!important;position:absolute!important;z-index:2!important;top:-60%!important;bottom:-60%!important;left:-40%!important;width:16%!important;background:linear-gradient(90deg,transparent,#fff9,transparent)!important;filter:blur(6px)!important;transform:skewX(-20deg)!important;animation:zoneBannerSweep 5s ease-in-out infinite!important;pointer-events:none!important}
-@media(prefers-reduced-motion:reduce){.app-card.findr .app-actions>a.findr-banner-link::after{animation:none!important}}
+
+/* FINDR secondary option matches Zone Sketch exactly */
+.app-card.findr .findr-online{display:grid;grid-template-columns:1fr auto;gap:6px 10px;margin-top:18px;padding-top:15px;border-top:1px solid #695627;background:transparent;align-items:center}
+.app-card.findr .findr-online strong{display:block;font-size:13px;color:#f5f5ef}
+.app-card.findr .findr-online div span{display:block;font-size:11px;color:#b2bbc5}
+.app-card.findr .findr-online a.unstable-link{display:inline-block;min-height:0;padding:8px 10px;border:1px solid #bd9e3a;border-radius:6px;background:transparent;color:#ffe274;font-size:10px;font-weight:800;text-decoration:none;text-align:center}
+.app-card.findr .findr-online p{grid-column:1/-1;margin:0;font-size:11px;color:#a5b4c0}
+@media(max-width:440px){.app-card.findr .findr-online{grid-template-columns:1fr}.app-card.findr .findr-online a.unstable-link{justify-self:start}}
