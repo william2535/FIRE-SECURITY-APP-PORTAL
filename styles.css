@@ -65,3 +65,11 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 @keyframes zoneButtonGlow{0%,100%{box-shadow:inset 0 2px 0 #ffffffa6,inset 0 -5px 9px #167d183d,0 4px 0 #207b1b,0 8px 20px #5ef02a36}50%{box-shadow:inset 0 2px 0 #ffffffd9,inset 0 -5px 9px #167d183d,0 4px 0 #207b1b,0 10px 28px #8dff5c73}}
 @keyframes zoneButtonGradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @media(prefers-reduced-motion:reduce){.app-card.zone .btn-zone,.app-card.zone .btn-zone::after{animation:none!important}.app-card.zone .btn-zone{transition:none}}
+
+
+/* Size correction: original compact button height, glossy treatment retained */
+.app-card.zone .app-actions .btn.btn-zone{height:52px!important;min-height:52px!important;max-height:52px!important;padding:0 17px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:10px!important;line-height:1!important;white-space:nowrap!important;font-size:13px!important}
+.app-card.zone .btn-zone .play-mark{display:block!important;position:relative!important;width:22px!important;height:24px!important;min-width:22px!important;max-width:22px!important;min-height:24px!important;max-height:24px!important;flex:0 0 22px!important;align-self:center!important;background:conic-gradient(from 30deg at 48% 50%,#ffce36 0 25%,#fb526a 25% 47%,#00c9ef 47% 75%,#10df94 75% 100%)!important;clip-path:polygon(4% 0,100% 50%,4% 100%)!important;filter:drop-shadow(0 1px 1px #14430c88)}
+.app-card.zone .btn-zone .play-label{display:inline!important;flex:0 1 auto!important;white-space:nowrap!important;overflow:visible!important;font-size:13px!important;line-height:1!important}
+.app-card.zone .btn-zone .play-arrow{right:15px!important;font-size:17px!important}
+@media(max-width:380px){.app-card.zone .btn-zone .play-label{font-size:12px!important}.app-card.zone .btn-zone .play-mark{width:19px!important;min-width:19px!important;flex-basis:19px!important}}
