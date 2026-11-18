@@ -73,3 +73,13 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 .app-card.zone .btn-zone .play-label{display:inline!important;flex:0 1 auto!important;white-space:nowrap!important;overflow:visible!important;font-size:13px!important;line-height:1!important}
 .app-card.zone .btn-zone .play-arrow{right:15px!important;font-size:17px!important}
 @media(max-width:380px){.app-card.zone .btn-zone .play-label{font-size:12px!important}.app-card.zone .btn-zone .play-mark{width:19px!important;min-width:19px!important;flex-basis:19px!important}}
+
+
+/* Compact premium illustrated Google Play banner, preserving original aspect ratio */
+.app-card.zone .app-actions .btn.zone-banner-link{display:block!important;position:relative!important;overflow:hidden!important;width:94%!important;max-width:560px!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:740/160!important;margin:0 auto!important;padding:0!important;background:transparent!important;border:0!important;border-radius:14px!important;box-shadow:0 5px 17px #79ff2c3d!important;line-height:0!important;animation:none!important;isolation:isolate!important}
+.app-card.zone .zone-banner-link::before{content:none!important}
+.app-card.zone .zone-banner-link::after{content:""!important;position:absolute!important;z-index:2!important;top:-60%!important;bottom:-60%!important;left:-40%!important;right:auto!important;width:16%!important;height:auto!important;background:linear-gradient(90deg,transparent,#ffffffa8,transparent)!important;filter:blur(6px)!important;transform:skewX(-20deg)!important;animation:zoneBannerSweep 5s ease-in-out infinite!important;pointer-events:none!important}
+.app-card.zone .zone-play-banner{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;overflow:visible!important}
+.app-card.zone .zone-banner-link:hover{transform:translateY(-2px)!important;box-shadow:0 8px 23px #79ff2c66!important}
+@keyframes zoneBannerSweep{0%,22%{left:-40%}50%,100%{left:135%}}
+@media(prefers-reduced-motion:reduce){.app-card.zone .zone-banner-link::after{animation:none!important}}
