@@ -21,3 +21,6 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 
 /* Exact project artwork on product cards; hero phone previews intentionally unchanged */
 .findr-preview .findr-brand{display:flex;align-items:center;justify-content:center;gap:14px;font-size:clamp(24px,2.5vw,39px);font-weight:900;letter-spacing:-.055em}.auth-findr-logo{width:66px;height:66px;object-fit:contain;flex-shrink:0;border-radius:13px}.jobs-preview .jobs-logo{display:flex;align-items:center;justify-content:center;gap:14px}.auth-jobs-logo{width:70px;height:75px;object-fit:contain;flex-shrink:0}.jobs-preview .jobs-logo>span{font-size:clamp(27px,2.5vw,41px);font-weight:800;letter-spacing:-.04em}@media(max-width:560px){.auth-findr-logo{width:54px;height:54px}.auth-jobs-logo{width:55px;height:60px}}
+
+/* Zone Sketch closed-testing group signup */
+.app-card.zone .group-link{display:inline-flex;align-items:center;justify-content:center;min-height:42px;margin-top:10px;padding:10px 13px;border:1px solid #76df51;border-radius:8px;color:#baff8e;background:#0a261c;font-size:11px;font-weight:850;letter-spacing:.04em;text-align:center;text-decoration:none}.app-card.zone .group-link:hover{background:#163d27}.app-card.zone .group-link:focus-visible{outline:3px solid #baff8e;outline-offset:3px}
