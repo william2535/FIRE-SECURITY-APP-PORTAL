@@ -143,3 +143,14 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 
 /* Uploaded Jobs artwork as phone dashboard header */
 .hero-art .device-jobs .jobs-banner-header{display:block!important;padding:0!important;background:#061b33!important;height:95px!important;overflow:hidden!important}.hero-art .device-jobs .jobs-banner-header img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}.hero-art .device-jobs .jobs-screen-welcome{padding-top:7px!important}@media(max-width:560px){.hero-art .device-jobs .jobs-banner-header{height:62px!important}}
+
+/* Jobs banner refinement: compact phone header and matching product-card artwork */
+.hero-art .device-jobs .jobs-banner-header{height:58px!important}
+.hero-art .device-jobs .jobs-banner-header img{object-fit:cover;object-position:center center}
+@media(max-width:560px){.hero-art .device-jobs .jobs-banner-header{height:39px!important}}
+.app-card.jobs .jobs-visual{background:#031427 url("DF59BB8F-5A24-47B0-AD9A-BB0832AE9DB9.png") center center / cover no-repeat!important}
+.app-card.jobs .jobs-preview{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;width:100%;height:100%;margin:0!important;text-align:right}
+.app-card.jobs .jobs-preview .jobs-logo{position:absolute;top:0;right:0;gap:0!important}
+.app-card.jobs .jobs-preview .auth-jobs-logo{width:43px;height:43px;object-fit:contain;filter:drop-shadow(0 2px 7px #000a)}
+.app-card.jobs .jobs-preview .jobs-logo>span,.app-card.jobs .jobs-preview>strong,.app-card.jobs .jobs-preview .jobs-rows{display:none!important}
+@media(max-width:560px){.app-card.jobs .jobs-visual{background-position:center center!important}.app-card.jobs .jobs-preview .auth-jobs-logo{width:35px;height:35px}}
