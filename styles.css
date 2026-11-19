@@ -174,3 +174,9 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 .hero-art .device-jobs .jobs-banner-header{height:65px!important;min-height:65px!important;margin:0!important;padding:0!important;background:#061b33!important;overflow:hidden!important}
 .hero-art .device-jobs .jobs-banner-header img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:left center!important}
 @media(max-width:560px){.hero-art .device-jobs .jobs-banner-header{height:50px!important;min-height:50px!important}}
+
+/* Definitive Jobs banner fix: no leftover header space or dark letterbox */
+.hero-art .device-jobs .jobs-demo-scroll .jobs-banner-header{display:block!important;box-sizing:border-box!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:3 / 1!important;margin:0!important;padding:0!important;border:0!important;line-height:0!important;overflow:hidden!important;background:transparent!important}
+.hero-art .device-jobs .jobs-demo-scroll .jobs-banner-header img{display:block!important;width:100%!important;height:100%!important;position:absolute!important;inset:0!important;object-fit:cover!important;object-position:center center!important;margin:0!important;padding:0!important}
+.hero-art .device-jobs .jobs-demo-scroll .jobs-banner-header{position:relative!important}
+.hero-art .device-jobs .jobs-demo-scroll .jobs-screen-stats{margin-top:0!important}
