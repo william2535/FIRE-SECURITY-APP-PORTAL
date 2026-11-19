@@ -154,3 +154,9 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 .app-card.jobs .jobs-preview .auth-jobs-logo{width:43px;height:43px;object-fit:contain;filter:drop-shadow(0 2px 7px #000a)}
 .app-card.jobs .jobs-preview .jobs-logo>span,.app-card.jobs .jobs-preview>strong,.app-card.jobs .jobs-preview .jobs-rows{display:none!important}
 @media(max-width:560px){.app-card.jobs .jobs-visual{background-position:center center!important}.app-card.jobs .jobs-preview .auth-jobs-logo{width:35px;height:35px}}
+
+/* Jobs phone: uploaded artwork replaces the old blue greeting header entirely */
+.hero-art .device-jobs .jobs-banner-header{height:105px!important;min-height:0!important;background:#061b33!important}
+.hero-art .device-jobs .jobs-banner-header img{width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-art .device-jobs .jobs-screen-welcome{display:none!important}
+@media(max-width:560px){.hero-art .device-jobs .jobs-banner-header{height:79px!important}}
