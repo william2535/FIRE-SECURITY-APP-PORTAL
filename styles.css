@@ -681,3 +681,16 @@ body{background-image:none!important}
 
 /* Centre FINDR live content inside its existing phone frame; do not move the phone. */
 @media(max-width:700px){.hero-art .device-findr .device-screen iframe.findr-preview-frame{position:relative!important;left:-12px!important}}
+
+/* White Apple branding for browser-test actions; keep existing layouts and artwork. */
+.app-actions .grid-free-test .ios-free-icon{color:#fff!important;-webkit-text-fill-color:#fff!important}
+@media(max-width:700px){
+body.portal-compact-grid #apps .app-grid>.app-card.jobs .app-visual.jobs-visual::after{
+ content:""!important;display:flex!important;align-items:center!important;
+ justify-content:center!important;position:absolute!important;z-index:8!important;
+ left:66%!important;top:76.5%!important;width:5.8%!important;height:13%!important;
+ background:#092b3b!important;color:#fff!important;pointer-events:none!important;
+ font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif!important;
+ font-size:clamp(17px,4.5vw,28px)!important;line-height:1!important;
+}
+}
