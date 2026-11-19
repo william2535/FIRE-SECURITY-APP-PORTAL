@@ -659,3 +659,6 @@ body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.grid-fre
 .about-grid .text-link span{color:#39d6ef!important}
 .about-grid .text-link:hover{color:#4de4f4!important;border-color:#39d6ef!important}
 @media(prefers-reduced-motion:reduce){.about-grid .text-link{transition:none}}
+
+/* Keep the concise hero tagline on one line, without an icon. */
+.hero .hero-note{display:block!important;white-space:nowrap!important;font-size:clamp(10px,2.8vw,17px)!important;letter-spacing:-.015em!important;line-height:1.35!important}
