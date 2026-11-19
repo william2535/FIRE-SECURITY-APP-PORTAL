@@ -165,3 +165,7 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 .hero-art .device-jobs .jobs-banner-header{height:65px!important;background:#031327!important}
 .hero-art .device-jobs .jobs-banner-header img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important}
 @media(max-width:560px){.hero-art .device-jobs .jobs-banner-header{height:50px!important}}
+
+/* Latest compact Jobs banner, preserving its full artwork in the phone and product card */
+.hero-art .device-jobs .jobs-banner-header img{object-fit:contain!important;object-position:center!important}
+.app-card.jobs .jobs-visual{background-image:url("25DE9A42-5B76-433C-BEBB-D9749AE5EC49.png")!important;background-size:cover!important;background-position:center!important}
