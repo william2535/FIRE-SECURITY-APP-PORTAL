@@ -570,3 +570,40 @@ body.portal-compact-grid .applications .app-card.findr .app-actions{
  margin:0!important;padding:0!important
 }
 }
+
+/* Final FINDR grid composition: image + two actions only, same height as Zone Sketch.
+   Does not affect list mode, phone previews, or Jobs. */
+@media(max-width:700px){
+body.portal-compact-grid #apps .app-grid>.app-card.findr{
+ display:flex!important;flex-direction:column!important;justify-content:space-between!important;
+ aspect-ratio:auto!important;min-height:0!important;height:auto!important;
+ padding:8px!important;gap:6px!important;overflow:hidden!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr>.app-visual.findr-visual{
+ position:relative!important;inset:auto!important;display:block!important;
+ flex:none!important;align-self:stretch!important;width:100%!;
+ width:100%!important;height:clamp(92px,16vw,130px)!important;
+ min-height:0!important;max-height:none!important;aspect-ratio:auto!important;
+ margin:0!important;padding:0!important;border-radius:9px!important;
+ background:#0a0905 url("play-feature-graphic-1024x500.png") center center / contain no-repeat!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr>.app-body{
+ position:relative!important;inset:auto!important;display:block!important;
+ flex:none!important;min-height:0!important;height:auto!important;
+ padding:0!important;margin:0!important;background:transparent!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-title-row,
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-title-row *{
+ display:none!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions{
+ display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr)!important;
+ gap:5px!important;margin:0!important;padding:0!important;align-items:center!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.findr-banner-link{
+ grid-column:1!important;grid-row:1!important;min-width:0!important;margin:0!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.grid-free-test{
+ grid-column:2!important;grid-row:1!important;min-width:0!important;margin:0!important
+}
+}
