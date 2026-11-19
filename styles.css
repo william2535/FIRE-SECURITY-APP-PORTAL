@@ -382,3 +382,39 @@ body.portal-compact-grid .applications .app-actions>a.grid-free-test-zone{border
 body.portal-compact-grid .applications .app-actions>a.grid-free-test-findr{border-color:#eacb34!important}
 body.portal-compact-grid .applications .app-actions>a.grid-free-test-jobs{border-color:#32d9f4!important}
 }
+
+/* Approved second reference: refined small-card typography and tidy CTA fit. */
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-card.zone .app-title-row h3,
+body.portal-compact-grid .applications .app-card.findr .app-title-row h3{
+  font-size:clamp(15px,4vw,19px)!important;font-weight:650!important;
+  line-height:1.15!important;letter-spacing:-.035em!important
+}
+body.portal-compact-grid .applications .app-card.zone .app-actions,
+body.portal-compact-grid .applications .app-card.findr .app-actions{
+  display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr)!important;
+  gap:5px!important;align-items:center!important;min-width:0!important
+}
+body.portal-compact-grid .applications .app-card.zone .app-actions>a.zone-banner-link,
+body.portal-compact-grid .applications .app-card.findr .app-actions>a.findr-banner-link{
+  grid-column:1!important;min-width:0!important;width:100%!important;overflow:hidden!important
+}
+body.portal-compact-grid .applications .app-card.zone .app-actions>a.grid-free-test,
+body.portal-compact-grid .applications .app-card.findr .app-actions>a.grid-free-test{
+  grid-column:2!important;min-width:0!important;width:100%!important;
+  height:clamp(26px,5.5vw,34px)!important;min-height:0!important;max-height:none!important;
+  padding:3px 2px!important;gap:3px!important;border-width:1px!important;
+  border-radius:7px!important;white-space:nowrap!important;
+  font-size:clamp(8px,1.85vw,10px)!important;font-weight:650!important;
+  letter-spacing:-.02em!important;overflow:hidden!important
+}
+body.portal-compact-grid .applications .app-card.zone .app-actions>a.grid-free-test>span,
+body.portal-compact-grid .applications .app-card.findr .app-actions>a.grid-free-test>span{
+  font-size:inherit!important;white-space:nowrap!important;flex-shrink:1!important
+}
+body.portal-compact-grid .applications .app-card.zone .app-actions>a.grid-free-test>svg,
+body.portal-compact-grid .applications .app-card.findr .app-actions>a.grid-free-test>svg{
+  flex:0 0 12px!important;width:12px!important;height:12px!important;
+  min-width:12px!important;min-height:12px!important;max-width:12px!important;max-height:12px!important
+}
+}
