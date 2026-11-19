@@ -169,3 +169,8 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 /* Latest compact Jobs banner, preserving its full artwork in the phone and product card */
 .hero-art .device-jobs .jobs-banner-header img{object-fit:contain!important;object-position:center!important}
 .app-card.jobs .jobs-visual{background-image:url("ACF1F676-BBEF-4344-8DDC-ED246B636A28.png")!important;background-size:cover!important;background-position:center!important}
+
+/* Jobs phone: edge-to-edge banner with no black letterboxing */
+.hero-art .device-jobs .jobs-banner-header{height:65px!important;min-height:65px!important;margin:0!important;padding:0!important;background:#061b33!important;overflow:hidden!important}
+.hero-art .device-jobs .jobs-banner-header img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:left center!important}
+@media(max-width:560px){.hero-art .device-jobs .jobs-banner-header{height:50px!important;min-height:50px!important}}
