@@ -669,3 +669,7 @@ html,body{background:#000!important}
 body{background-image:none!important}
 .site-header{background:#000f!important}
 .hero-art{background-color:#000!important}
+
+/* Apple-branded free browser shortcuts, replacing the laboratory flask icon. */
+.app-actions .grid-free-test .ios-free-icon{display:inline-block!important;position:static!important;flex:0 0 auto!important;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif!important;font-size:18px!important;font-weight:500!important;line-height:1!important;white-space:nowrap!important;vertical-align:middle!important}
+@media(max-width:700px){body.portal-compact-grid .applications .app-actions>a.grid-free-test>.ios-free-icon{font-size:17px!important}}
