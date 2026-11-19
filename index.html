@@ -37,7 +37,7 @@
   if(started)return;started=true;
   const load=(frame)=>{if(frame?.dataset.deferredSrc){frame.src=frame.dataset.deferredSrc;delete frame.dataset.deferredSrc;}};
   const findr=document.querySelector('.findr-preview-frame');
-  if(findr){findr.addEventListener('load',()=>{setTimeout(()=>findr.classList.add('findr-preview-ready'),1800)},{once:true});}
+  if(findr){findr.addEventListener('load',()=>{setTimeout(()=>findr.classList.add('findr-preview-ready'),1100)},{once:true});}
   load(frames[0]);
   setTimeout(()=>load(frames[1]),900);
  }
