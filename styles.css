@@ -694,3 +694,11 @@ body.portal-compact-grid #apps .app-grid>.app-card.jobs .app-visual.jobs-visual:
  font-size:clamp(17px,4.5vw,28px)!important;line-height:1!important;
 }
 }
+
+/* Slightly zoom out FINDR live phone preview so its logo is fully visible. */
+@media(max-width:700px){
+.hero-art .device-findr .device-screen iframe.findr-preview-frame{
+ transform:scale(.29)!important;transform-origin:top left!important;
+ left:0!important;
+}
+}
