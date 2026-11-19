@@ -540,3 +540,33 @@ body.portal-compact-grid .applications .app-grid>.app-card.findr .app-title-row 
  line-height:1.15!important;font-weight:650!important
 }
 }
+
+/* FINDR grid: artwork already contains brand copy; no duplicate title or empty space. */
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-grid>.app-card.findr{
+ display:flex!important;flex-direction:column!important;justify-content:flex-start!important;
+ height:auto!important;min-height:0!important;aspect-ratio:auto!important;
+ padding:8px!important;gap:5px!important
+}
+body.portal-compact-grid .applications .app-grid>.app-card.findr>.app-visual.findr-visual{
+ position:relative!important;inset:auto!important;display:block!important;
+ flex:0 0 auto!important;width:100%!important;
+ height:auto!important;max-height:none!important;min-height:0!important;
+ aspect-ratio:1024/500!important;
+ background-image:url("play-feature-graphic-1024x500.png")!important;
+ background-size:contain!important;background-position:center!important;
+ background-repeat:no-repeat!important;background-color:#090906!important
+}
+body.portal-compact-grid .applications .app-grid>.app-card.findr>.app-body{
+ position:relative!important;inset:auto!important;display:block!important;
+ flex:0 0 auto!important;padding:0!important;margin:0!important;
+ height:auto!important;min-height:0!important;background:transparent!important
+}
+body.portal-compact-grid .applications .app-card.findr .app-title-row,
+body.portal-compact-grid .applications .app-card.findr .app-title-row h3{
+ display:none!important
+}
+body.portal-compact-grid .applications .app-card.findr .app-actions{
+ margin:0!important;padding:0!important
+}
+}
