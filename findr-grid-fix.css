@@ -1,0 +1,57 @@
+/* Dedicated FINDR grid presentation, isolated from the full list card. */
+.grid-findr-art{display:none}
+@media(max-width:700px){
+body.portal-compact-grid #apps .app-grid>.app-card.findr{
+ display:flex!important;flex-direction:column!important;justify-content:flex-start!important;
+ align-items:stretch!important;gap:6px!important;padding:8px!important;
+ min-height:0!important;height:auto!important;aspect-ratio:auto!important;
+ overflow:hidden!important;background:#090906!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr>.app-visual.findr-visual{display:none!important}
+body.portal-compact-grid #apps .app-grid>.app-card.findr>.grid-findr-art{
+ display:block!important;position:relative!important;flex:none!important;
+ width:100%!important;height:auto!important;min-height:0!important;
+ aspect-ratio:1024 / 500!important;border-radius:8px!important;
+ background:#080805 url("play-feature-graphic-1024x500.png") center / contain no-repeat!important;
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr>.app-body{
+ position:relative!important;inset:auto!important;display:block!important;
+ flex:none!important;width:100%!important;min-height:0!important;height:auto!important;
+ padding:0!important;margin:0!important;background:transparent!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-title-row,
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-title-row *{display:none!important}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-body>p,
+body.portal-compact-grid #apps .app-grid>.app-card.findr .tags,
+body.portal-compact-grid #apps .app-grid>.app-card.findr .experimental,
+body.portal-compact-grid #apps .app-grid>.app-card.findr .group-link,
+body.portal-compact-grid #apps .app-grid>.app-card.findr .micro{display:none!important}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions{
+ display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr)!important;
+ gap:5px!important;align-items:center!important;width:100%!important;
+ margin:0!important;padding:0!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.findr-banner-link{
+ display:block!important;grid-column:1!important;grid-row:1!important;
+ position:relative!important;width:100%!important;min-width:0!important;height:auto!important;
+ padding:0!important;margin:0!important;line-height:0!important;overflow:visible!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.findr-banner-link>svg{
+ position:relative!important;inset:auto!important;display:block!important;
+ width:100%!important;height:auto!important;aspect-ratio:740 / 160!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.grid-free-test{
+ display:inline-flex!important;grid-column:2!important;grid-row:1!important;
+ position:relative!important;min-width:0!important;width:100%!important;
+ height:clamp(26px,5.5vw,34px)!important;min-height:0!important;
+ padding:3px 2px!important;margin:0!important;gap:3px!important;
+ border:1px solid #eacb34!important;border-radius:7px!important;
+ background:#211a06!important;color:#ffe75b!important;
+ box-shadow:none!important;font-size:clamp(8px,1.85vw,10px)!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.grid-free-test>svg{
+ display:block!important;position:static!important;flex:0 0 12px!important;
+ width:12px!important;height:12px!important;min-width:12px!important;min-height:12px!important;
+ fill:none!important;stroke:currentColor!important
+}
+}
