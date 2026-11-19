@@ -678,3 +678,6 @@ body{background-image:none!important}
 .hero-art .device-findr .findr-preview-frame{opacity:0!important;transition:opacity .35s ease-out!important}
 .hero-art .device-findr .findr-preview-frame.findr-preview-ready{opacity:1!important}
 @media(prefers-reduced-motion:reduce){.hero-art .device-findr .findr-preview-frame{transition:none!important}}
+
+/* Centre FINDR live content inside its existing phone frame; do not move the phone. */
+@media(max-width:700px){.hero-art .device-findr .device-screen iframe.findr-preview-frame{position:relative!important;left:-12px!important}}
