@@ -261,3 +261,20 @@ body.portal-compact-grid .applications .app-card.jobs .jobs-preview{visibility:h
 body.portal-compact-grid .applications .app-card{overflow:hidden!important}
 body.portal-compact-grid .applications .app-card.jobs{grid-template-columns:40% minmax(0,1fr)!important}
 }
+
+/* Compact grid: phone showcase stays above, but app cards occupy one phone viewport
+   once scrolled to the cards. Avoid giant whitespace and clipping. */
+@media(max-width:700px){
+body.portal-compact-grid .hero{display:flex!important;flex-direction:column!important;gap:8px!important;padding-bottom:8px!important}
+body.portal-compact-grid .hero-copy{display:none!important}
+body.portal-compact-grid .hero-art{width:100%!important;height:clamp(220px,37svh,340px)!important;min-height:0!important;margin:0 auto!important}
+body.portal-compact-grid .applications{padding-top:8px!important}
+body.portal-compact-grid .applications .app-grid{gap:8px!important}
+body.portal-compact-grid .applications .app-card{padding:7px!important;gap:3px!important}
+body.portal-compact-grid .applications .app-card.zone .app-visual,body.portal-compact-grid .applications .app-card.findr .app-visual{height:clamp(70px,12svh,105px)!important;min-height:0!important}
+body.portal-compact-grid .applications .app-card.jobs .app-visual{height:clamp(100px,17svh,135px)!important;min-height:0!important}
+body.portal-compact-grid .applications .app-card.jobs{grid-template-columns:40% minmax(0,1fr)!important}
+body.portal-compact-grid .applications .app-card .app-visual{background-size:contain!important}
+body.portal-compact-grid .applications .app-card .app-title-row h3{font-size:clamp(15px,4vw,20px)!important}
+body.portal-compact-grid .applications .app-actions{margin-top:2px!important}
+}
