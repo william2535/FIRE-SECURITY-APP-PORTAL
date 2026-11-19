@@ -69,3 +69,35 @@ body.portal-compact-grid #apps .app-grid>.app-card.zone>.app-body{
 body.portal-compact-grid #apps .app-grid>.app-card.zone .app-actions,
 body.portal-compact-grid #apps .app-grid>.app-card.zone .app-actions>a{pointer-events:auto!important}
 }
+
+/* Compact Manual Archives strip in mobile Grid Mode, matching annotated height. */
+@media(max-width:700px){
+body.portal-compact-grid #archives.archives{
+ margin-top:24px!important;padding:0!important;min-height:0!important
+}
+body.portal-compact-grid #archives .archive-inner{
+ display:block!important;position:relative!important;min-height:0!important;
+ height:auto!important;padding:17px 19px!important;border-radius:16px!important;
+ overflow:hidden!important
+}
+body.portal-compact-grid #archives .archive-art{display:none!important}
+body.portal-compact-grid #archives .archive-copy{
+ display:block!important;position:relative!important;padding:0!important;
+ margin:0!important;min-height:0!important
+}
+body.portal-compact-grid #archives .archive-copy .section-index,
+body.portal-compact-grid #archives .archive-copy>p,
+body.portal-compact-grid #archives .archive-copy .archive-stats{display:none!important}
+body.portal-compact-grid #archives .archive-copy h2{
+ display:block!important;font-size:clamp(20px,5.6vw,29px)!important;
+ line-height:1.13!important;letter-spacing:-.045em!important;
+ margin:0!important;padding:0!important;max-width:100%!important
+}
+body.portal-compact-grid #archives .archive-copy .btn{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ opacity:0!important;margin:0!important;padding:0!important;z-index:2!important;
+}
+body.portal-compact-grid #archives .archive-copy .btn:focus-visible{
+ opacity:1!important;outline:2px solid #20b9ff!important;outline-offset:-2px!important
+}
+}
