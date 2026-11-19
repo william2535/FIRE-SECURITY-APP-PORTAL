@@ -278,3 +278,16 @@ body.portal-compact-grid .applications .app-card .app-visual{background-size:con
 body.portal-compact-grid .applications .app-card .app-title-row h3{font-size:clamp(15px,4vw,20px)!important}
 body.portal-compact-grid .applications .app-actions{margin-top:2px!important}
 }
+
+/* Grid-only free testing shortcuts: preserve the existing Play banners. */
+.grid-free-test{display:none}
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-actions{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:5px!important}
+body.portal-compact-grid .applications .app-actions>a.zone-banner-link,body.portal-compact-grid .applications .app-actions>a.findr-banner-link,body.portal-compact-grid .applications .app-actions>a.jobs-banner-link{flex:1 1 100%!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;flex:1 1 100%;min-height:31px;padding:5px 8px!important;border:1px solid currentColor;border-radius:8px;font-size:10px;font-weight:850;letter-spacing:.045em;line-height:1.2;text-decoration:none;background:#061d1c;white-space:nowrap}
+body.portal-compact-grid .applications .grid-free-test svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+body.portal-compact-grid .applications .grid-free-test-zone{color:#9eff62;background:#092616!important}
+body.portal-compact-grid .applications .grid-free-test-findr{color:#ffe45b;background:#241d06!important}
+body.portal-compact-grid .applications .grid-free-test-jobs{color:#65e5ff;background:#062b40!important}
+body.portal-compact-grid .applications .grid-free-test:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+}
