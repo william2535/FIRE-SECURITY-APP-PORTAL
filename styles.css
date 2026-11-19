@@ -244,3 +244,20 @@ body.portal-compact-grid .applications .findr-preview{transform:scale(.78);trans
 body.portal-compact-grid .applications .app-card.jobs .jobs-preview{display:none!important}
 }
 @media(max-width:370px){body.portal-compact-grid .applications .app-visual{height:72px!important;min-height:72px!important}body.portal-compact-grid .applications .app-card.jobs .app-visual{min-height:110px!important}}
+
+/* Compact grid refinement: keep the three phone previews above the cards.
+   Fit each approved graphic in its panel instead of cropping it. */
+@media(max-width:700px){
+body.portal-compact-grid .hero{display:flex!important;flex-direction:column!important}
+body.portal-compact-grid .hero-art{display:block!important}
+body.portal-compact-grid .applications{padding-top:12px!important}
+body.portal-compact-grid .applications .app-card .app-visual{background-size:contain!important;background-position:center center!important;background-repeat:no-repeat!important;background-color:#031321!important}
+body.portal-compact-grid .applications .app-card.zone .app-visual{height:100px!important;min-height:100px!important}
+body.portal-compact-grid .applications .app-card.findr .app-visual{height:100px!important;min-height:100px!important}
+body.portal-compact-grid .applications .app-card.jobs .app-visual{height:132px!important;min-height:132px!important;background-size:contain!important}
+body.portal-compact-grid .applications .app-card.zone .zone-preview{width:100%!important;max-width:100%!important}
+body.portal-compact-grid .applications .app-card.findr .findr-preview{visibility:hidden!important}
+body.portal-compact-grid .applications .app-card.jobs .jobs-preview{visibility:hidden!important}
+body.portal-compact-grid .applications .app-card{overflow:hidden!important}
+body.portal-compact-grid .applications .app-card.jobs{grid-template-columns:40% minmax(0,1fr)!important}
+}
