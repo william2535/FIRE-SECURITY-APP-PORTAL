@@ -506,3 +506,37 @@ body.portal-compact-grid .applications .app-card.findr .app-body{
   flex:0 0 auto!important;min-height:0!important;
 }
 }
+
+/* FINDR compact card definitive sizing: prevent legacy flex and min-height from
+   enlarging the artwork. The whole wide advert fits inside a short image slot. */
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-grid>.app-card.findr{
+ display:flex!important;flex-direction:column!important;
+ aspect-ratio:auto!important;height:auto!important;min-height:0!important;
+ padding:8px!important;gap:4px!important;overflow:hidden!important
+}
+body.portal-compact-grid .applications .app-grid>.app-card.findr>.app-visual.findr-visual{
+ display:block!important;position:relative!important;inset:auto!important;
+ flex:none!important;align-self:stretch!important;
+ box-sizing:border-box!important;width:100%!important;
+ height:clamp(76px,11.5vw,105px)!important;
+ min-height:0!important;max-height:105px!important;
+ aspect-ratio:auto!important;padding:0!important;margin:0!important;
+ background-image:url("play-feature-graphic-1024x500.png")!important;
+ background-size:contain!important;background-position:center center!important;
+ background-repeat:no-repeat!important;background-color:#080806!important;
+ border-radius:8px!important
+}
+body.portal-compact-grid .applications .app-grid>.app-card.findr>.app-body{
+ display:flex!important;position:relative!important;inset:auto!important;
+ flex:none!important;min-height:0!important;height:auto!important;
+ padding:0!important;gap:4px!important;background:transparent!important
+}
+body.portal-compact-grid .applications .app-grid>.app-card.findr .app-title-row{
+ display:block!important;margin:0!important
+}
+body.portal-compact-grid .applications .app-grid>.app-card.findr .app-title-row h3{
+ display:block!important;margin:0!important;font-size:16px!important;
+ line-height:1.15!important;font-weight:650!important
+}
+}
