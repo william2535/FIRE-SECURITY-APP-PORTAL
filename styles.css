@@ -121,3 +121,6 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 .app-card.findr .findr-preview .auth-findr-logo{width:45px;height:45px;object-fit:contain;filter:drop-shadow(0 2px 7px #000a)}
 .app-card.findr .findr-preview .findr-sub,.app-card.findr .findr-preview .findr-panels{display:none!important}
 @media(max-width:560px){.app-card.findr .findr-visual{background-position:center center!important}.app-card.findr .findr-preview .auth-findr-logo{width:36px;height:36px}}
+
+/* Zone Sketch hero phone: green outline only; preserve layout and iframe */
+.hero-art .device-zone{box-shadow:0 0 0 2px #69f52f,0 22px 38px #000b!important}
