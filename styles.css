@@ -370,3 +370,15 @@ body.portal-compact-grid .applications .app-card.jobs .app-actions>a.grid-free-t
 }
 body.portal-compact-grid .applications .app-card.jobs .jobs-preview{display:none!important}
 }
+
+/* Final polish: slim Free Test outlines, matching the Play banners. */
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-actions>a.grid-free-test,
+body.portal-compact-grid .applications .app-card.jobs .app-actions>a.grid-free-test{
+  border-width:1px!important;border-radius:8px!important;
+  box-shadow:none!important;font-weight:750!important;
+}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test-zone{border-color:#7be64c!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test-findr{border-color:#eacb34!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test-jobs{border-color:#32d9f4!important}
+}
