@@ -55,3 +55,36 @@ body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.grid-fre
  fill:none!important;stroke:currentColor!important
 }
 }
+
+/* Full-height FINDR artwork: blurred edge-to-edge backdrop plus uncropped sharp art.
+   The entire card is filled without zooming/cropping the words in the banner. */
+@media(max-width:700px){
+body.portal-compact-grid #apps .app-grid>.app-card.findr{
+ position:relative!important;isolation:isolate!important;display:flex!important;
+ justify-content:flex-end!important;min-height:0!important;
+ aspect-ratio:0.87/1!important;overflow:hidden!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr::before{
+ content:""!important;display:block!important;position:absolute!important;z-index:0!important;
+ inset:-12px!important;pointer-events:none!important;
+ background:url("play-feature-graphic-1024x500.png") center / cover no-repeat!important;
+ filter:blur(13px) brightness(.47) saturate(1.2)!important;
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr::after{
+ content:""!important;display:block!important;position:absolute!important;z-index:0!important;
+ inset:0!important;pointer-events:none!important;
+ background:linear-gradient(180deg,#0000 0%,#07050120 45%,#080600bb 85%,#080600eb 100%)!important;
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr>.grid-findr-art{
+ position:absolute!important;inset:0 0 auto 0!important;z-index:1!important;
+ display:block!important;width:100%!important;height:74%!important;
+ aspect-ratio:auto!important;border-radius:0!important;
+ background-image:url("play-feature-graphic-1024x500.png")!important;
+ background-position:center 25%!important;background-size:contain!important;
+ background-repeat:no-repeat!important;background-color:transparent!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.findr>.app-body{
+ position:relative!important;z-index:2!important;inset:auto!important;
+ margin-top:auto!important;padding:0!important;background:transparent!important
+}
+}
