@@ -662,3 +662,10 @@ body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.grid-fre
 
 /* Keep the concise hero tagline on one line, without an icon. */
 .hero .hero-note{display:block!important;white-space:nowrap!important;font-size:clamp(10px,2.8vw,17px)!important;letter-spacing:-.015em!important;line-height:1.35!important}
+
+/* True-black page canvas: retain branded cards, phone screens and accent colours. */
+:root{--bg:#000000}
+html,body{background:#000!important}
+body{background-image:none!important}
+.site-header{background:#000f!important}
+.hero-art{background-color:#000!important}
