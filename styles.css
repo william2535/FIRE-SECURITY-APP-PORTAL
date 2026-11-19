@@ -493,3 +493,16 @@ body.portal-compact-grid .applications .app-card.findr .app-title-row h3{
  font-weight:650!important;color:#fff!important
 }
 }
+
+/* FINDR image proportion fix: preserve source 1024×500 ratio without stretching. */
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-card.findr .app-visual.findr-visual{
+  flex:0 0 auto!important;aspect-ratio:1024/500!important;
+  width:100%!important;height:auto!important;min-height:0!important;
+  background-size:contain!important;background-position:center center!important;
+  background-repeat:no-repeat!important;background-color:#090906!important;
+}
+body.portal-compact-grid .applications .app-card.findr .app-body{
+  flex:0 0 auto!important;min-height:0!important;
+}
+}
