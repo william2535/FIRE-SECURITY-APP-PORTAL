@@ -1,0 +1,42 @@
+/* Mobile grid: square Zone Sketch graphic and real linked hotspots. */
+.grid-zone-art{display:none}
+@media(max-width:700px){
+body.portal-compact-grid .hero-copy{display:block!important}
+body.portal-compact-grid .hero{display:flex!important;flex-direction:column!important;gap:16px!important;padding-top:24px!important;padding-bottom:18px!important}
+body.portal-compact-grid .hero-copy{width:100%!important}
+body.portal-compact-grid .hero-art{width:100%!important}
+body.portal-compact-grid #apps .app-grid>.app-card.zone{
+ position:relative!important;display:block!important;isolation:isolate!important;
+ width:100%!important;height:auto!important;min-height:0!important;
+ aspect-ratio:1/1!important;padding:0!important;margin:0!important;
+ border-radius:17px!important;overflow:hidden!important;
+ background:#041406 url("35C8260B-F122-437C-9135-D12B6FDC0B48.png") center / 100% 100% no-repeat!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.zone>.grid-zone-art,
+body.portal-compact-grid #apps .app-grid>.app-card.zone>.app-visual.zone-visual{display:none!important}
+body.portal-compact-grid #apps .app-grid>.app-card.zone>.app-body{
+ position:absolute!important;inset:0!important;z-index:3!important;
+ display:block!important;width:100%!important;height:100%!important;
+ min-height:0!important;margin:0!important;padding:0!important;background:transparent!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.zone .app-title-row,
+body.portal-compact-grid #apps .app-grid>.app-card.zone .app-body>p,
+body.portal-compact-grid #apps .app-grid>.app-card.zone .tags,
+body.portal-compact-grid #apps .app-grid>.app-card.zone .experimental{display:none!important}
+body.portal-compact-grid #apps .app-grid>.app-card.zone .app-actions{
+ position:absolute!important;left:4%!important;right:4%!important;bottom:7.5%!important;
+ width:92%!important;height:13%!important;margin:0!important;padding:0!important;
+ display:grid!important;grid-template-columns:1.05fr .95fr!important;gap:4%!important;align-items:stretch!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.zone .app-actions>a.zone-banner-link,
+body.portal-compact-grid #apps .app-grid>.app-card.zone .app-actions>a.grid-free-test{
+ display:block!important;position:relative!important;grid-row:1!important;
+ width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;
+ max-height:none!important;margin:0!important;padding:0!important;
+ border:0!important;background:transparent!important;color:transparent!important;
+ box-shadow:none!important;opacity:0!important
+}
+body.portal-compact-grid #apps .app-grid>.app-card.zone .app-actions>a.zone-banner-link{grid-column:1!important}
+body.portal-compact-grid #apps .app-grid>.app-card.zone .app-actions>a.grid-free-test{grid-column:2!important}
+body.portal-compact-grid #apps .app-grid>.app-card.zone .app-actions>a:focus-visible{opacity:1!important;outline:2px solid #fff!important;outline-offset:1px!important}
+}
