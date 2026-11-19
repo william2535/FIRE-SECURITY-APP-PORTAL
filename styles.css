@@ -198,3 +198,21 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 /* Approved Jobs promotional artwork (uploaded to repository). Keep CTAs unchanged. */
 .app-card.jobs .jobs-visual{background:#031427 url("3C0F936A-56A2-470A-8E32-756A6CF35F41.png") center center / cover no-repeat!important}
 .app-card.jobs .jobs-preview{visibility:hidden!important;pointer-events:none!important}
+
+/* Header navigation and compact app view switch. */
+.site-header .header-inner{gap:12px}
+.site-header .portal-navigation{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-left:auto;white-space:nowrap}
+.site-header .portal-navigation>a{font-size:clamp(11px,2.8vw,13px);font-weight:750;color:#e0edf3;white-space:nowrap}
+.site-header .portal-navigation>a:hover{color:#4be1f8}
+.portal-view-switch{display:inline-flex;align-items:center;gap:3px;padding:3px;border:1px solid #28566a;border-radius:11px;background:#091f2d}
+.portal-view-button{width:35px;height:35px;display:grid;place-items:center;border:0;border-radius:8px;background:transparent;color:#8caebd;cursor:pointer;padding:7px}
+.portal-view-button svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.portal-view-button[aria-pressed="true"]{background:#123f55;color:#4ee6ff;box-shadow:inset 0 0 0 1px #247995}
+.portal-view-button:focus-visible{outline:2px solid #62e9ff;outline-offset:2px}
+@media(max-width:560px){.site-header .header-inner{gap:7px}.site-header .portal-navigation{gap:7px}.portal-view-button{width:31px;height:34px;padding:6px}.portal-view-button svg{width:19px;height:19px}.portal-view-switch{gap:1px;padding:2px}.site-header .portal-navigation>a{font-size:11px}}
+/* List mode: one product card per row, full-width artwork and content. */
+.applications.portal-list-mode .app-grid{display:flex!important;flex-direction:column!important;gap:18px!important}
+.applications.portal-list-mode .app-card{width:100%!important;max-width:none!important;display:grid!important;grid-template-columns:minmax(0,35%) minmax(0,1fr);align-items:stretch}
+.applications.portal-list-mode .app-visual{height:auto!important;min-height:220px!important}
+.applications.portal-list-mode .app-body{min-width:0!important}
+@media(max-width:700px){.applications.portal-list-mode .app-card{display:block!important}.applications.portal-list-mode .app-visual{min-height:0!important;height:160px!important}.applications.portal-list-mode .app-body{padding-top:18px!important}}
