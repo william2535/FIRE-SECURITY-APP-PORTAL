@@ -193,3 +193,9 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
    An absolutely positioned SVG inside an aspect-ratio-only link can paint blank. */
 .app-card.jobs .app-actions>a.jobs-banner-link{aspect-ratio:auto!important;height:auto!important;min-height:unset!important;max-height:none!important;display:block!important;line-height:0!important;overflow:visible!important}
 .app-card.jobs .app-actions>a.jobs-banner-link>svg.zone-play-banner{position:relative!important;inset:auto!important;display:block!important;width:100%!important;height:auto!important;aspect-ratio:740/160!important;max-height:none!important;visibility:visible!important;opacity:1!important}
+
+/* Jobs Google Play testing group — same CTA treatment as Zone Sketch, in Jobs blue. */
+.app-card.jobs .app-actions>a.group-link{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:42px;margin-top:10px;padding:10px 13px;border:1px solid #27d9ff;border-radius:8px;color:#a6efff;background:#082b3d;font-size:11px;font-weight:850;letter-spacing:.04em;text-align:center;text-decoration:none;line-height:1.4;max-width:100%;transition:background .2s,border-color .2s}
+.app-card.jobs .app-actions>a.group-link:hover{background:#10435b;border-color:#8deeff}
+.app-card.jobs .app-actions>a.group-link:focus-visible{outline:3px solid #8deeff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.app-card.jobs .app-actions>a.group-link{transition:none}}
