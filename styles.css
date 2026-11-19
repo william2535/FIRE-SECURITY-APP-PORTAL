@@ -323,3 +323,50 @@ body.portal-compact-grid .applications .app-actions>a.grid-free-test>svg{display
 body.portal-compact-grid .applications .app-actions>a.grid-free-test>svg path{fill:none!important;stroke:currentColor!important;stroke-width:1.8!important}
 body.portal-compact-grid .applications .app-actions>a.grid-free-test>span{display:inline!important;position:static!important;font-size:10px!important;line-height:1!important;white-space:nowrap!important}
 }
+
+/* Approved Jobs feature card in mobile grid: full-bleed artwork, CTAs overlaid at bottom. */
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-card.jobs{
+  position:relative!important;display:block!important;grid-column:1/-1!important;
+  width:100%!important;min-height:0!important;aspect-ratio:1.85/1!important;
+  padding:0!important;overflow:hidden!important;border:2px solid #21dfff!important;
+  border-radius:18px!important;background:#031427!important;
+  box-shadow:0 0 16px #00cfff28,inset 0 0 12px #00bfff1b!important
+}
+body.portal-compact-grid .applications .app-card.jobs .app-visual.jobs-visual{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  min-height:0!important;margin:0!important;padding:0!important;border-radius:0!important;
+  background-image:url("3C0F936A-56A2-470A-8E32-756A6CF35F41.png")!important;
+  background-size:cover!important;background-position:center center!important;
+  background-repeat:no-repeat!important
+}
+body.portal-compact-grid .applications .app-card.jobs .app-body{
+  position:absolute!important;inset:0!important;z-index:2!important;display:flex!important;
+  flex-direction:column!important;justify-content:flex-end!important;
+  padding:0 10px 10px!important;background:linear-gradient(180deg,transparent 54%,#00101a25 74%,#00101abb 100%)!important
+}
+body.portal-compact-grid .applications .app-card.jobs .app-title-row,
+body.portal-compact-grid .applications .app-card.jobs .app-title-row h3{display:none!important}
+body.portal-compact-grid .applications .app-card.jobs .app-actions{
+  display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)!important;
+  align-items:center!important;gap:9px!important;width:100%!important;margin:0!important
+}
+body.portal-compact-grid .applications .app-card.jobs .app-actions>a.jobs-banner-link{
+  display:block!important;grid-column:1!important;grid-row:1!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  padding:0!important;margin:0!important;line-height:0!important
+}
+body.portal-compact-grid .applications .app-card.jobs .app-actions>a.jobs-banner-link svg{
+  display:block!important;position:relative!important;width:100%!important;height:auto!important;
+  aspect-ratio:740/160!important;max-height:none!important
+}
+body.portal-compact-grid .applications .app-card.jobs .app-actions>a.grid-free-test{
+  display:flex!important;grid-column:2!important;grid-row:1!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  aspect-ratio:3.8/1!important;align-self:center!important;
+  padding:4px 8px!important;border-radius:10px!important;
+  background:#001e2bdb!important;color:#7beaff!important;border:2px solid #27dfff!important;
+  box-shadow:0 0 10px #00cfff44!important
+}
+body.portal-compact-grid .applications .app-card.jobs .jobs-preview{display:none!important}
+}
