@@ -312,3 +312,14 @@ body.portal-compact-grid .applications .grid-free-test svg{width:clamp(12px,3vw,
 body.portal-compact-grid .applications .app-card.jobs .app-body{justify-content:center!important}
 body.portal-compact-grid .applications .app-card.jobs .app-title-row h3{font-size:clamp(20px,5vw,26px)!important}
 }
+
+/* Fix inherited SVG sizing: Free Test icon must be small, outlined and visible. */
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-actions>a.grid-free-test{display:inline-flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:4px!important;height:36px!important;min-height:36px!important;max-height:36px!important;padding:5px 6px!important;font-size:10px!important;font-weight:800!important;line-height:1!important;color:inherit!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test-zone{color:#a6ff72!important;background:#092719!important;border-color:#77f24b!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test-findr{color:#ffe75b!important;background:#272006!important;border-color:#ffdf3d!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test-jobs{color:#7beaff!important;background:#062d42!important;border-color:#27dfff!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test>svg{display:block!important;position:static!important;inset:auto!important;flex:0 0 14px!important;width:14px!important;height:14px!important;min-width:14px!important;min-height:14px!important;max-width:14px!important;max-height:14px!important;aspect-ratio:1!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important;overflow:visible!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test>svg path{fill:none!important;stroke:currentColor!important;stroke-width:1.8!important}
+body.portal-compact-grid .applications .app-actions>a.grid-free-test>span{display:inline!important;position:static!important;font-size:10px!important;line-height:1!important;white-space:nowrap!important}
+}
