@@ -467,3 +467,29 @@ body.portal-compact-grid .applications .app-card.findr .app-actions>a.grid-free-
  background:#211a06dc!important;color:#ffe75b!important
 }
 }
+
+/* FINDR mobile grid: show the complete wide artwork rather than zooming/cropping it. */
+@media(max-width:700px){
+body.portal-compact-grid .applications .app-card.findr .app-visual.findr-visual{
+ background-size:contain!important;background-position:center top!important;
+ background-color:#090906!important
+}
+body.portal-compact-grid .applications .app-card.findr{
+ aspect-ratio:auto!important;height:auto!important;min-height:0!important;
+ display:flex!important;flex-direction:column!important
+}
+body.portal-compact-grid .applications .app-card.findr .app-visual.findr-visual{
+ position:relative!important;inset:auto!important;flex:1 0 auto!important;
+ width:100%!important;height:auto!important;min-height:0!important;
+ aspect-ratio:1024/500!important;background-size:100% 100%!important
+}
+body.portal-compact-grid .applications .app-card.findr .app-body{
+ position:relative!important;inset:auto!important;flex:0 0 auto!important;
+ padding:5px 7px 8px!important;background:#090906!important
+}
+body.portal-compact-grid .applications .app-card.findr .app-title-row{display:block!important;margin:0 0 4px!important}
+body.portal-compact-grid .applications .app-card.findr .app-title-row h3{
+ display:block!important;font-size:clamp(15px,4vw,19px)!important;
+ font-weight:650!important;color:#fff!important
+}
+}
