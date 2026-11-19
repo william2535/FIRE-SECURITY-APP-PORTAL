@@ -140,3 +140,6 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 
 /* Small portal refresh control */
 .portal-update{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:7px 10px;border:1px solid #29758b;border-radius:8px;background:#082431;color:#b5f3ff;font:700 11px system-ui;cursor:pointer;white-space:nowrap}.portal-update:hover,.portal-update:focus-visible{background:#104054;border-color:#34dfff}.portal-update span:first-child{font-size:17px;line-height:1}@media(max-width:600px){.portal-update{padding:7px;font-size:10px}.portal-update span:last-child{display:none}}
+
+/* Uploaded Jobs artwork as phone dashboard header */
+.hero-art .device-jobs .jobs-banner-header{display:block!important;padding:0!important;background:#061b33!important;height:95px!important;overflow:hidden!important}.hero-art .device-jobs .jobs-banner-header img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}.hero-art .device-jobs .jobs-screen-welcome{padding-top:7px!important}@media(max-width:560px){.hero-art .device-jobs .jobs-banner-header{height:62px!important}}
