@@ -635,3 +635,12 @@ body.portal-compact-grid #apps .app-grid>.app-card.findr .app-actions>a.grid-fre
 .maker-icon{color:#37d8e9;font-size:15px;line-height:1}
 .maker-separator{height:17px;width:1px;background:#326477}
 @media(max-width:560px){.maker-credits{gap:8px;margin-top:13px;padding:8px 10px;font-size:10px}.maker-separator{height:14px}}
+
+/* Integrated studio credit strip, designed as part of the hero identity. */
+.hero .maker-credits{display:flex;align-items:center;justify-content:center;gap:13px;width:fit-content;max-width:100%;margin-top:17px;padding:10px 15px;border:1px solid #34bdd0;border-radius:12px;background:linear-gradient(115deg,#061d2a,#061923);box-shadow:inset 0 0 0 1px #0b465540,0 4px 16px #00151b50;color:#d8f5f6;font-size:11px;font-weight:800;letter-spacing:.055em}
+.hero .maker-credit{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.hero .maker-icon{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;color:#42e2f4;font-size:17px;font-weight:850}
+.hero .maker-code-icon{color:#9dff54;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px}
+.hero .maker-credit strong{color:#a6ff60;font-weight:900}
+.hero .maker-separator{height:22px;width:1px;background:#42899b}
+@media(max-width:560px){.hero .maker-credits{width:100%;gap:7px;padding:9px 8px;font-size:clamp(8px,2.1vw,11px);letter-spacing:0}.hero .maker-credit{gap:4px}.hero .maker-icon{width:18px;height:19px;font-size:14px}.hero .maker-code-icon{font-size:12px}.hero .maker-separator{height:19px}}
