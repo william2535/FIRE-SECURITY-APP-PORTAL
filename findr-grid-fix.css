@@ -137,16 +137,7 @@ body.portal-compact-grid #apps .app-grid>.app-card.findr::after{
  z-index:4!important;left:55.4%!important;top:78.5%!important;
  width:8.5%!important;height:10%!important;align-items:center!important;
  justify-content:center!important;pointer-events:none!important;
- background:#171204!important;color:#ffe64d!important;
- font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif!important;
- font-size:clamp(17px,5vw,27px)!important;line-height:1!important;
-}
-body.portal-compact-grid #apps .app-grid>.app-card.zone>.grid-zone-art::after{
- content:""!important;display:flex!important;position:absolute!important;
- z-index:4!important;left:55.4%!important;top:78.5%!important;
- width:8.5%!important;height:10%!important;align-items:center!important;
- justify-content:center!important;pointer-events:none!important;
- background:#0a2008!important;color:#a2ff52!important;
+ background:#171204!important;color:#ffffff!important;
  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif!important;
  font-size:clamp(17px,5vw,27px)!important;line-height:1!important;
 }
