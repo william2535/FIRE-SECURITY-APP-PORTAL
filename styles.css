@@ -199,3 +199,7 @@ body{background:radial-gradient(ellipse at 75% 15%,#0a2b40 0%,transparent 43%),#
 .app-card.jobs .jobs-preview>strong{display:block!important;margin-top:20px!important}
 .app-card.jobs .jobs-preview .jobs-rows{display:none!important}
 @media(max-width:560px){.app-card.jobs .jobs-preview .auth-jobs-logo{width:52px!important;height:52px!important}}
+
+/* Approved Jobs promotional artwork (uploaded to repository). Keep CTAs unchanged. */
+.app-card.jobs .jobs-visual{background:#031427 url("3C0F936A-56A2-470A-8E32-756A6CF35F41.png") center center / cover no-repeat!important}
+.app-card.jobs .jobs-preview{visibility:hidden!important;pointer-events:none!important}
