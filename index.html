@@ -49,4 +49,39 @@
  if(document.readyState==='complete')schedule();
  else window.addEventListener('load',schedule,{once:true});
 })();
+</script>
+<script>
+/* Reading-paced white highlight, limited to the About copy below the phones. */
+(function(){
+ const section=document.querySelector('.intro-about');
+ if(!section||!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const words=[];
+ section.querySelectorAll('p').forEach(p=>{
+  const walker=document.createTreeWalker(p,NodeFilter.SHOW_TEXT);
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(node=>{
+   const fragment=document.createDocumentFragment();
+   (node.textContent.match(/\S+|\s+/g)||[]).forEach(piece=>{
+    if(/^\s+$/.test(piece)){fragment.appendChild(document.createTextNode(piece));return;}
+    const span=document.createElement('span');span.className='reading-glow-word';span.textContent=piece;
+    words.push(span);fragment.appendChild(span);
+   });
+   node.replaceWith(fragment);
+  });
+ });
+ if(!words.length)return;
+ let timer=null,index=0,active=null;
+ function tick(){
+  if(active)active.classList.remove('reading-glow-active');
+  active=words[index];active.classList.add('reading-glow-active');
+  index=(index+1)%words.length;
+ }
+ function stop(){if(timer){clearInterval(timer);timer=null;}if(active){active.classList.remove('reading-glow-active');active=null;}}
+ const observer=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting&&!document.hidden){if(!timer){tick();timer=setInterval(tick,285);}}
+  else stop();
+ },{threshold:0.08});
+ observer.observe(section);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(section.getBoundingClientRect().top<innerHeight&&section.getBoundingClientRect().bottom>0&&!timer){tick();timer=setInterval(tick,285);}});
+})();
 </script></body></html>
