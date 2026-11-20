@@ -738,3 +738,12 @@ body.portal-compact-grid #apps .app-grid>.app-card.jobs .app-visual.jobs-visual:
  .intro-about .reading-glow-word{transition:none!important}
  .intro-about .reading-glow-word.reading-glow-active{text-shadow:none!important}
 }
+
+/* Clearly labelled, touch-friendly App Hub update action. */
+.portal-update{min-height:44px!important;min-width:98px!important;gap:8px!important;padding:9px 13px!important;border-radius:12px!important;background:linear-gradient(135deg,#07374b,#0b2536)!important;border:1px solid #39b9dc!important;color:#e8fbff!important;box-shadow:inset 0 1px #ffffff18,0 0 12px #00cfff16!important;font-size:12px!important}
+.portal-update span:first-child{font-size:20px!important}
+.portal-update:active{transform:scale(.97)}
+.portal-update[aria-busy="true"] span:first-child{animation:portal-update-spin .8s linear infinite}
+@keyframes portal-update-spin{to{transform:rotate(360deg)}}
+@media(max-width:700px){.portal-update{min-width:78px!important;padding:8px 9px!important;gap:5px!important}.portal-update span:last-child{display:inline!important;font-size:10px!important}}
+@media(prefers-reduced-motion:reduce){.portal-update[aria-busy="true"] span:first-child{animation:none}}
