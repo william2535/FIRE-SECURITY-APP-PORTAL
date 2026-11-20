@@ -702,3 +702,17 @@ body.portal-compact-grid #apps .app-grid>.app-card.jobs .app-visual.jobs-visual:
  left:0!important;
 }
 }
+
+/* Relocated introductory About copy: between phone previews and app cards.
+   Keep all remaining About content in its original section near the footer. */
+.intro-about{padding-top:48px;padding-bottom:0}
+.intro-about h2{font-size:clamp(36px,5vw,66px);letter-spacing:-.06em;line-height:1.13;margin:0 0 24px;font-weight:800}
+.intro-about h2 span{color:#8398a8}
+.intro-about p{max-width:740px;font-size:15px;line-height:1.8;color:#aebcc7;margin:0}
+@media(max-width:700px){
+ .intro-about{padding-top:32px!important;padding-bottom:0!important}
+ .intro-about h2{font-size:clamp(30px,7vw,42px)!important;line-height:1.12!important;margin:0 0 22px!important}
+ .intro-about p{font-size:15px!important;line-height:1.75!important}
+ .intro-about + .applications{padding-top:40px!important}
+ .about .about-grid{display:block!important}
+}
