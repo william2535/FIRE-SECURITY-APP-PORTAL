@@ -807,3 +807,10 @@ body.portal-compact-grid #apps .app-card .jobs-description{display:none!importan
 .install-overview[open] .install-overview-chevron{transform:rotate(180deg)}
 .install-overview .install-methods{padding:0 20px 22px}
 @media(max-width:700px){.install-overview-toggle{padding:19px 18px}.install-overview .install-methods{padding:0 12px 14px}.install-overview-toggle strong{font-size:24px}}
+
+/* Install overview: black background, simple cyan outline; About links at bottom. */
+.install-overview{background:#000!important;border:1px solid #286f90!important;box-shadow:none!important}
+.install-overview-toggle{background:#000!important}
+.install-overview[open],.install-overview[open]>.install-overview-toggle{background:#000!important}
+.about.shell{padding-top:55px!important;padding-bottom:75px!important}
+.about .section-index{color:#70c9d9!important}
