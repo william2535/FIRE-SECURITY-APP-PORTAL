@@ -747,3 +747,8 @@ body{background-image:none!important}
 
 /* Footer colour only: neutral black instead of navy. */
 footer.footer{background:#000!important}
+
+/* Match the pure-black footer on the three requested panels only. */
+.archive-inner,
+.install-dropdown,
+.hero .maker-credits{background:#000!important;background-image:none!important}
