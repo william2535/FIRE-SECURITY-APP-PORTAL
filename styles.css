@@ -814,3 +814,12 @@ body.portal-compact-grid #apps .app-card .jobs-description{display:none!importan
 .install-overview[open],.install-overview[open]>.install-overview-toggle{background:#000!important}
 .about.shell{padding-top:55px!important;padding-bottom:75px!important}
 .about .section-index{color:#70c9d9!important}
+
+/* White-outline install box and tighter transition into the bottom About links. */
+.install-overview{border-color:#f4f8fb!important}
+.install-guide.shell{padding-bottom:14px!important}
+.about.shell{padding-top:14px!important;padding-bottom:40px!important}
+@media(max-width:700px){
+ .install-guide.shell{padding-bottom:10px!important}
+ .about.shell{padding-top:10px!important;padding-bottom:34px!important}
+}
