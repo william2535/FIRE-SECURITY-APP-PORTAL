@@ -767,3 +767,8 @@ footer.footer{background:#000!important}
 .jobs-description{display:flex;flex-direction:column;gap:14px;color:#aebdc7;font-size:14px;line-height:1.7}
 .jobs-description p{margin:0}
 .jobs-description strong{color:#e8f5f9;font-weight:750}
+
+/* Grid mode uses promotional artwork only; expanded descriptions belong exclusively to Info/list view. */
+body.portal-compact-grid #apps .app-card .zone-description,
+body.portal-compact-grid #apps .app-card .findr-description,
+body.portal-compact-grid #apps .app-card .jobs-description{display:none!important}
