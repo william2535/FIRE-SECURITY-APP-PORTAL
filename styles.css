@@ -728,7 +728,8 @@ body.portal-compact-grid #apps .app-grid>.app-card.jobs .app-visual.jobs-visual:
 }
 
 /* Gentle white reading light: one word at a time, about 210 words/minute. */
-.intro-about .reading-glow-word{transition:color .2s ease,text-shadow .2s ease}
+.intro-about .reading-glow-word{transition:color .28s ease-in-out,text-shadow .28s ease-in-out}
+.intro-about .reading-glow-word.reading-glow-trail{color:#edf8ff!important;text-shadow:0 0 4px rgba(255,255,255,.42),0 0 10px rgba(220,245,255,.2)}
 .intro-about .reading-glow-word.reading-glow-active{
  color:#fff!important;
  text-shadow:0 0 5px rgba(255,255,255,.9),0 0 13px rgba(255,255,255,.55),0 0 23px rgba(210,242,255,.25);
