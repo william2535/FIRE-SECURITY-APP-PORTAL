@@ -772,3 +772,8 @@ footer.footer{background:#000!important}
 body.portal-compact-grid #apps .app-card .zone-description,
 body.portal-compact-grid #apps .app-card .findr-description,
 body.portal-compact-grid #apps .app-card .jobs-description{display:none!important}
+
+/* Compact Info caption beneath the existing information icon. */
+#portal-list-view{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:1px!important;padding:2px 4px!important;height:38px!important;min-width:35px!important}
+#portal-list-view svg{width:19px!important;height:19px!important;flex:none!important}
+#portal-list-view .portal-info-label{display:block;font-size:9px;line-height:11px;font-weight:700;letter-spacing:.01em;white-space:nowrap}
