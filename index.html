@@ -110,12 +110,12 @@
   index=(index+1)%words.length;
  }
  function stop(){if(timer){clearInterval(timer);timer=null;}if(active){active.classList.remove('reading-glow-active');active=null;}}
- section.querySelectorAll('p').forEach(p=>p.addEventListener('click',()=>{if(timer){clearInterval(timer);timer=null;}section.querySelectorAll('.reading-glow-active,.reading-glow-trail').forEach(word=>word.classList.remove('reading-glow-active','reading-glow-trail'));active=null;index=0;if(!document.hidden){tick();timer=setInterval(tick,300);}}));
+ section.querySelectorAll('p').forEach(p=>p.addEventListener('click',()=>{if(timer){clearInterval(timer);timer=null;}section.querySelectorAll('.reading-glow-active,.reading-glow-trail').forEach(word=>word.classList.remove('reading-glow-active','reading-glow-trail'));active=null;index=0;if(!document.hidden){tick();timer=setInterval(tick,285);}}));
  const observer=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting&&!document.hidden){if(!timer){tick();timer=setInterval(tick,300);}}
+  if(entries[0].isIntersecting&&!document.hidden){if(!timer){tick();timer=setInterval(tick,285);}}
   else stop();
  },{threshold:0.08});
  observer.observe(section);
- document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(section.getBoundingClientRect().top<innerHeight&&section.getBoundingClientRect().bottom>0&&!timer){tick();timer=setInterval(tick,300);}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(section.getBoundingClientRect().top<innerHeight&&section.getBoundingClientRect().bottom>0&&!timer){tick();timer=setInterval(tick,285);}});
 })();
 </script></body></html>
