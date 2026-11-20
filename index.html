@@ -72,16 +72,16 @@
  if(!words.length)return;
  let timer=null,index=0,active=null;
  function tick(){
-  if(active)active.classList.remove('reading-glow-active');
-  active=words[index];active.classList.add('reading-glow-active');
+  if(active){active.classList.remove('reading-glow-active');active.classList.add('reading-glow-trail');const previous=active;setTimeout(()=>previous.classList.remove('reading-glow-trail'),320);}
+  active=words[index];active.classList.remove('reading-glow-trail');active.classList.add('reading-glow-active');
   index=(index+1)%words.length;
  }
  function stop(){if(timer){clearInterval(timer);timer=null;}if(active){active.classList.remove('reading-glow-active');active=null;}}
  const observer=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting&&!document.hidden){if(!timer){tick();timer=setInterval(tick,285);}}
+  if(entries[0].isIntersecting&&!document.hidden){if(!timer){tick();timer=setInterval(tick,245);}}
   else stop();
  },{threshold:0.08});
  observer.observe(section);
- document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(section.getBoundingClientRect().top<innerHeight&&section.getBoundingClientRect().bottom>0&&!timer){tick();timer=setInterval(tick,285);}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(section.getBoundingClientRect().top<innerHeight&&section.getBoundingClientRect().bottom>0&&!timer){tick();timer=setInterval(tick,245);}});
 })();
 </script></body></html>
