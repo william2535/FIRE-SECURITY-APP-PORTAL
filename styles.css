@@ -716,3 +716,13 @@ body.portal-compact-grid #apps .app-grid>.app-card.jobs .app-visual.jobs-visual:
  .intro-about + .applications{padding-top:40px!important}
  .about .about-grid{display:block!important}
 }
+
+/* Preserve the original About headline's exact cyan-to-green gradient after relocation. */
+.intro-about h2{color:#f4f8fb!important}
+.intro-about h2 span{
+ color:#36e9d4!important;
+ background:linear-gradient(105deg,#13c8f0 0%,#25e3c7 55%,#84f45c 100%)!important;
+ -webkit-background-clip:text!important;
+ background-clip:text!important;
+ -webkit-text-fill-color:transparent!important;
+}
