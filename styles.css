@@ -687,8 +687,8 @@ body{background-image:none!important}
 @media(max-width:700px){
 body.portal-compact-grid #apps .app-grid>.app-card.jobs .app-visual.jobs-visual::after{
  content:""!important;display:flex!important;align-items:center!important;
- justify-content:center!important;position:absolute!important;z-index:8!important;
- left:60.5%!important;top:76.5%!important;width:5.8%!important;height:13%!important;
+ justify-content:flex-start!important;padding-left:2.2%!important;box-sizing:border-box!important;position:absolute!important;z-index:8!important;
+ left:60.5%!important;top:76.5%!important;width:12%!important;height:13%!important;
  background:#092b3b!important;color:#fff!important;pointer-events:none!important;
  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif!important;
  font-size:clamp(17px,4.5vw,28px)!important;line-height:1!important;
