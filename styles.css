@@ -823,3 +823,6 @@ body.portal-compact-grid #apps .app-card .jobs-description{display:none!importan
  .install-guide.shell{padding-bottom:10px!important}
  .about.shell{padding-top:10px!important;padding-bottom:34px!important}
 }
+
+/* White rotating install toggle with black arrow, same size and position. */
+.install-overview-chevron{background:#fff!important;color:#000!important;border-color:#fff!important}
