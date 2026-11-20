@@ -726,3 +726,14 @@ body.portal-compact-grid #apps .app-grid>.app-card.jobs .app-visual.jobs-visual:
  background-clip:text!important;
  -webkit-text-fill-color:transparent!important;
 }
+
+/* Gentle white reading light: one word at a time, about 210 words/minute. */
+.intro-about .reading-glow-word{transition:color .2s ease,text-shadow .2s ease}
+.intro-about .reading-glow-word.reading-glow-active{
+ color:#fff!important;
+ text-shadow:0 0 5px rgba(255,255,255,.9),0 0 13px rgba(255,255,255,.55),0 0 23px rgba(210,242,255,.25);
+}
+@media(prefers-reduced-motion:reduce){
+ .intro-about .reading-glow-word{transition:none!important}
+ .intro-about .reading-glow-word.reading-glow-active{text-shadow:none!important}
+}
