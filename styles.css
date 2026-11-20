@@ -752,3 +752,8 @@ footer.footer{background:#000!important}
 .archive-inner,
 .install-dropdown,
 .hero .maker-credits{background:#000!important;background-image:none!important}
+
+/* Zone Sketch list-view description: three clearly separated entries. */
+.zone-description{display:flex;flex-direction:column;gap:14px;color:#aebdc7;font-size:14px;line-height:1.7}
+.zone-description p{margin:0}
+.zone-description strong{color:#e8f5f9;font-weight:750}
