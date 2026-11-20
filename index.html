@@ -111,10 +111,10 @@
  }
  function stop(){if(timer){clearInterval(timer);timer=null;}if(active){active.classList.remove('reading-glow-active');active=null;}}
  const observer=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting&&!document.hidden){if(!timer){tick();timer=setInterval(tick,265);}}
+  if(entries[0].isIntersecting&&!document.hidden){if(!timer){tick();timer=setInterval(tick,300);}}
   else stop();
  },{threshold:0.08});
  observer.observe(section);
- document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(section.getBoundingClientRect().top<innerHeight&&section.getBoundingClientRect().bottom>0&&!timer){tick();timer=setInterval(tick,265);}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(section.getBoundingClientRect().top<innerHeight&&section.getBoundingClientRect().bottom>0&&!timer){tick();timer=setInterval(tick,300);}});
 })();
 </script></body></html>
