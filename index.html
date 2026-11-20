@@ -64,23 +64,23 @@
  });
 })();
 </script><script>(function(){const root=document.querySelector('.applications');const list=document.getElementById('portal-list-view');const grid=document.getElementById('portal-grid-view');if(!root||!list||!grid)return;function setMode(mode){const isList=mode==='list';root.classList.toggle('portal-list-mode',isList);document.body.classList.toggle('portal-compact-grid',!isList);list.setAttribute('aria-pressed',String(isList));grid.setAttribute('aria-pressed',String(!isList));try{localStorage.setItem('portal-app-view',mode)}catch{}}let stored='grid';try{stored=localStorage.getItem('portal-app-view')||'grid'}catch{}setMode(stored==='list'?'list':'grid');list.addEventListener('click',()=>setMode('list'));grid.addEventListener('click',()=>setMode('grid'));})();</script><script>(function(){const d=document.getElementById("install-dropdown");const nav=document.getElementById("install-nav-link");if(!d||!nav)return;nav.addEventListener("click",()=>{d.open=true});if(location.hash==="#install")d.open=true;})();</script><script>
-/* Start the portal immediately; hydrate heavyweight live phone previews only after
-   first paint. The iframe URLs and visuals remain exactly the same once loaded. */
+/* Prioritise the three hero previews, loading left to right as soon as markup exists.
+   Zone Sketch starts first, FINDR follows, and Jobs is already rendered locally. */
 (function(){
- const frames=[...document.querySelectorAll('iframe[data-deferred-src]')];
- if(!frames.length)return;
- let started=false;
- function start(){
-  if(started)return;started=true;
-  const load=(frame)=>{if(frame?.dataset.deferredSrc){frame.src=frame.dataset.deferredSrc;delete frame.dataset.deferredSrc;}};
-  const findr=document.querySelector('.findr-preview-frame');
-  if(findr){findr.addEventListener('load',()=>{setTimeout(()=>findr.classList.add('findr-preview-ready'),1100)},{once:true});}
-  load(frames[0]);
-  setTimeout(()=>load(frames[1]),900);
- }
- const schedule=()=>setTimeout(start,1000);
- if(document.readyState==='complete')schedule();
- else window.addEventListener('load',schedule,{once:true});
+ const frames=[...document.querySelectorAll('.hero-art iframe[data-deferred-src]')];
+ const findr=document.querySelector('.findr-preview-frame');
+ if(findr) findr.addEventListener('load',()=>{
+  setTimeout(()=>findr.classList.add('findr-preview-ready'),350);
+ },{once:true});
+ frames.forEach((frame,index)=>{
+  const url=frame.dataset.deferredSrc;
+  if(!url)return;
+  frame.loading='eager';
+  frame.setAttribute('fetchpriority','high');
+  const begin=()=>{frame.src=url;delete frame.dataset.deferredSrc;};
+  if(index===0)begin();
+  else setTimeout(begin,index*180);
+ });
 })();
 </script>
 <script>
