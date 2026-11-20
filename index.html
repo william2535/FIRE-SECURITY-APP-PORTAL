@@ -70,7 +70,7 @@
  const frames=[...document.querySelectorAll('.hero-art iframe[data-deferred-src]')];
  const findr=document.querySelector('.findr-preview-frame');
  if(findr) findr.addEventListener('load',()=>{
-  setTimeout(()=>findr.classList.add('findr-preview-ready'),350);
+  setTimeout(()=>findr.classList.add('findr-preview-ready'),100);
  },{once:true});
  frames.forEach((frame,index)=>{
   const url=frame.dataset.deferredSrc;
@@ -79,7 +79,7 @@
   frame.setAttribute('fetchpriority','high');
   const begin=()=>{frame.src=url;delete frame.dataset.deferredSrc;};
   if(index===0)begin();
-  else setTimeout(begin,index*180);
+  else setTimeout(begin,index*80);
  });
 })();
 </script>
