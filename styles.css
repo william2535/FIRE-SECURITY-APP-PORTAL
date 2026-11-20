@@ -777,3 +777,22 @@ body.portal-compact-grid #apps .app-card .jobs-description{display:none!importan
 #portal-list-view{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:1px!important;padding:2px 4px!important;height:38px!important;min-width:35px!important}
 #portal-list-view svg{width:19px!important;height:19px!important;flex:none!important}
 #portal-list-view .portal-info-label{display:block;font-size:9px;line-height:11px;font-weight:700;letter-spacing:.01em;white-space:nowrap}
+
+/* Three independent install guides, reusing the existing dark/cyan dropdown style. */
+.install-choice-title{font-size:clamp(25px,4vw,37px);letter-spacing:-.045em;margin:10px 0 22px;color:#f4f8fb}
+.install-methods{display:grid;gap:14px}
+.install-method{margin:0!important;min-width:0}
+.install-method .install-dropdown-toggle{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important}
+.install-method-heading{display:flex!important;align-items:center!important;gap:13px!important;min-width:0}
+.install-method-heading>span:last-child{display:flex;flex-direction:column;gap:3px;min-width:0}
+.install-method-heading small{color:#7eb5c7;font-size:10px;font-weight:800;letter-spacing:.12em}
+.install-method-heading strong{font-size:clamp(19px,3vw,28px)!important;line-height:1.1!important}
+.install-method-logo{display:grid;place-items:center;width:42px;height:42px;flex:none}
+.install-method-logo svg{width:35px;height:35px}
+.install-method-logo.android-mark{color:#a4f54b}
+.install-method-logo.apple-mark{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;color:#fff;font-size:39px}
+.install-shortcut{padding:12px 22px 25px!important;color:#b7cbd5}
+.install-shortcut p{line-height:1.65}
+.install-shortcut ol{padding-left:23px;line-height:1.8}
+.install-shortcut li{padding:5px 0}
+@media(max-width:700px){.install-methods{gap:12px}.install-method-heading strong{font-size:20px!important}.install-shortcut{padding:8px 16px 22px!important}}
