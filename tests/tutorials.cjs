@@ -20,7 +20,8 @@ const server = http.createServer((request, response) => {
     response.end('Not found');
   }
 });
-const chapterIds = ['start','controls','quick-rooms','room-labels','doors','delete','zones','devices','device-edit','other-systems','circuits','additional','completed','backup','troubleshooting'];
+const guideIds = ['zone-sketch', 'jobs'];
+const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSync(path.join(root, 'assets/tutorials', id)).filter(file => /\.(?:webp|png|jpe?g)$/i.test(file)).sort()]));
 
 (async () => {
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
@@ -65,7 +66,37 @@ const chapterIds = ['start','controls','quick-rooms','room-labels','doors','dele
       await activate(tutorial);
       await page.waitForURL('**/tutorials.html');
       assert.equal(await page.locator('.site-header .portal-tutorials-link').getAttribute('aria-current'), 'page');
-      assert.deepEqual(await page.locator('.tutorial-chapter[id]').evaluateAll(nodes => nodes.map(node => node.id)), chapterIds);
+      assert.deepEqual(await page.locator('.tutorial-guide[id]').evaluateAll(nodes => nodes.map(node => node.id)), guideIds);
+      const chaptersByGuide = Object.fromEntries(await Promise.all(guideIds.map(async id => [id, await page.locator('#' + id + ' .tutorial-chapter[id]').evaluateAll(nodes => nodes.map(node => node.id))])));
+      const allChapterIds = Object.values(chaptersByGuide).flat();
+      assert.equal(new Set(allChapterIds).size, allChapterIds.length, 'chapter IDs are unique across both apps');
+      assert(chaptersByGuide['zone-sketch'].includes('delete') && chaptersByGuide['zone-sketch'].includes('asset-organisation'), 'existing Delete anchor and device organisation chapter remain');
+      for (const id of ['jobs-assets','jobs-results','jobs-defects','jobs-favourites']) assert(chaptersByGuide.jobs.includes(id), id + ' supports its direct link');
+      for (const id of guideIds) {
+        assert(chaptersByGuide[id].length > 0, id + ' contains chapters');
+        for (const menu of ['.tutorial-sidebar', '.tutorial-jump']) {
+          assert.deepEqual(await page.locator('#' + id + ' ' + menu + ' .tutorial-toc a').evaluateAll(nodes => nodes.map(node => node.hash.slice(1))), chaptersByGuide[id], id + ' ' + menu + ' lists every chapter in order');
+        }
+        const references = await page.locator('#' + id + ' .tutorial-shot img').evaluateAll(nodes => [...new Set(nodes.map(node => new URL(node.src).pathname.split('/').pop()))].sort());
+        assert.deepEqual(references, screenshotFiles[id], id + ' references every captured screenshot asset');
+      }
+      const assertSelectedGuide = async id => {
+        await page.waitForFunction(id => [...document.querySelectorAll('.tutorial-guide')].every(guide => guide.hidden === (guide.id !== id)), id);
+        await settle();
+        for (const candidate of guideIds) {
+          assert.equal(await page.locator('#' + candidate).isVisible(), candidate === id, candidate + ' visibility follows app choice');
+          assert.equal(await page.locator('[data-guide-link="' + candidate + '"]').getAttribute('aria-current'), candidate === id ? 'true' : null, 'app picker selection is explicit');
+          if (candidate !== id) assert.equal(await page.locator('#' + candidate + ' .tutorial-toc a[aria-current="location"]').count(), 0, 'hidden guide has no active chapter');
+        }
+        assert(await page.locator('#' + id + ' .tutorial-toc a[aria-current="location"]').count() > 0, 'visible guide marks its current chapter');
+        await noOverflow(id + ' guide');
+      };
+      const selectGuide = async id => {
+        await activate(page.locator('[data-guide-link="' + id + '"]'));
+        await page.waitForURL(url => url.hash === '#' + id);
+        await assertSelectedGuide(id);
+      };
+      await assertSelectedGuide('zone-sketch');
       await noOverflow('Tutorial');
       if (width === 390 && engineName === 'chromium') await page.screenshot({path:'/tmp/hub-tutorial-phone.png'});
       if (width === 1440 && engineName === 'chromium') {await page.locator('#start').scrollIntoViewIfNeeded();await page.screenshot({path:'/tmp/hub-tutorial-desktop.png'})}
@@ -87,85 +118,109 @@ const chapterIds = ['start','controls','quick-rooms','room-labels','doors','dele
           assert(found, 'guide link has a real anchor: ' + resource.url);
         }
       }
-      const shots = page.locator('.screenshot-link');
-      assert.equal(await shots.count(), 15, 'guide includes all 15 real screenshots');
-      for (const image of await page.locator('.tutorial-shot img').all()) {
-        await image.scrollIntoViewIfNeeded();
-        await image.evaluate(el => el.complete && el.naturalWidth > 0 ? true : new Promise((resolve,reject) => {el.addEventListener('load',()=>resolve(true),{once:true});el.addEventListener('error',()=>reject(Error('Screenshot failed: '+el.src)),{once:true})}));
-        assert(await image.evaluate(el => el.complete && el.naturalWidth > 0 && el.naturalHeight > 0), 'screenshot loads');
-      }
-      await noOverflow('Tutorial after image loads');
+      // App selection preserves native fragment/history navigation, including old chapter URLs.
+      await selectGuide('jobs');
+      await selectGuide('zone-sketch');
+      await page.goBack();
+      await page.waitForURL(url => url.hash === '#jobs');
+      await assertSelectedGuide('jobs');
+      await page.goForward();
+      await page.waitForURL(url => url.hash === '#zone-sketch');
+      await assertSelectedGuide('zone-sketch');
 
-      // On phones the chapter menu must close, scroll and focus its destination.
-      if (width <= 720) {
-        const jump = page.locator('.tutorial-jump');
-        await activate(jump.locator('summary'));
-        await activate(jump.locator('a[href="#delete"]'));
-        await settle();
-        assert(!await jump.evaluate(el => el.open), 'mobile chapter menu closes after choosing a chapter');
-        assert.equal(new URL(page.url()).hash, '#delete');
-        assert.equal(await page.evaluate(() => document.activeElement.id), 'delete', 'chapter receives keyboard focus');
-        const chapter = await page.locator('#delete').boundingBox();
-        const header = await page.locator('.site-header').boundingBox();
-        assert(chapter.y >= header.height - 2 && chapter.y < height / 2, 'chapter heading remains below the sticky header');
-        if (width === 390 && engineName === 'chromium') await page.screenshot({path:'/tmp/hub-tutorial-delete-phone.png'});
-      }
+      for (const guideId of guideIds) {
+        await selectGuide(guideId);
+        const guide = page.locator('#' + guideId);
+        for (const image of await guide.locator('.tutorial-shot img').all()) {
+          await image.scrollIntoViewIfNeeded();
+          await page.waitForFunction(el => el.complete, await image.elementHandle(), {timeout:10000});
+          assert(await image.evaluate(el => el.complete && el.naturalWidth > 0 && el.naturalHeight > 0), 'screenshot loads: ' + await image.getAttribute('src'));
+        }
+        await noOverflow(guideId + ' after image loads');
 
-      // The screenshot viewer opens by keyboard on desktop and by touch on phones.
-      const opener = shots.first();
-      await opener.scrollIntoViewIfNeeded();
-      if (touch) await opener.tap();
-      else {await opener.focus();await page.keyboard.press('Enter')}
-      const viewer = page.locator('#screenshot-viewer');
-      await viewer.waitFor({state:'visible'});
-      await page.waitForFunction(()=>{const image=document.querySelector('#screenshot-image');return image.complete&&image.naturalWidth>0});
-      assert.equal(await page.evaluate(() => document.activeElement.id), 'screenshot-close');
-      assert.equal(await viewer.getAttribute('aria-labelledby'), 'screenshot-caption');
-      for(let i=0;i<7;i++){await page.keyboard.press('Tab');assert(await page.evaluate(()=>document.activeElement===document.body||!!document.activeElement.closest('#screenshot-viewer')),'Tab cannot focus background page controls')}
-      assert((await page.locator('#screenshot-caption').innerText()).length > 10);
-      const fitted = await page.locator('#screenshot-image').boundingBox();
-      const stage = await page.locator('.screenshot-stage').boundingBox();
-      assert(fitted.width <= stage.width + 1 && fitted.height <= stage.height + 1, 'viewer initially fits image');
-      await activate(page.locator('#screenshot-size'));
-      assert.equal(await page.locator('#screenshot-size').getAttribute('aria-pressed'), 'true');
-      const zoomed = await page.locator('#screenshot-image').boundingBox();
-      assert(zoomed.width > fitted.width || zoomed.height > fitted.height, 'Zoom in enlarges actual screenshot');
-      assert(await page.locator('.screenshot-stage').evaluate(el => el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight), 'zoomed screenshot can scroll');
-      await activate(page.locator('#screenshot-size'));
-      assert.equal(await page.locator('#screenshot-size').innerText(), 'Zoom in');
-      assert.equal(await page.locator('#screenshot-size').getAttribute('aria-pressed'), 'false');
-      await noOverflow('Open screenshot dialog');
-      if (width === 390 || width === 1440) await page.screenshot({path:'/tmp/hub-tutorial-viewer-' + engineName + '-' + width + '.png'});
-      await activate(page.locator('#screenshot-close'));
-      await viewer.waitFor({state:'hidden'});
-      await page.waitForFunction(()=>!document.querySelector('#screenshot-image').hasAttribute('src'));
-      assert(await opener.evaluate(el => el === document.activeElement), 'Close returns focus to screenshot link');
-      assert.equal(await page.locator('#screenshot-image').getAttribute('src'), null, 'closed viewer releases image');
-      await activate(opener);
-      await page.keyboard.press('Escape');
-      await viewer.waitFor({state:'hidden'});
-      await page.waitForFunction(()=>!document.querySelector('#screenshot-image').hasAttribute('src'));
-      assert(await opener.evaluate(el => el === document.activeElement), 'Escape returns focus');
-      await activate(opener);
-      // The page edge is outside the dialog for every viewport; test native backdrop hit testing.
-      if (touch) await page.touchscreen.tap(2,2);else await page.mouse.click(2,2);
-      await viewer.waitFor({state:'hidden'});
-      await page.waitForFunction(()=>!document.querySelector('#screenshot-image').hasAttribute('src'));
-      assert(await opener.evaluate(el => el === document.activeElement), 'backdrop dismissal returns focus');
+        // Both chapter menus must navigate every chapter and keep focus below the sticky header.
+        const mobileMenu = width <= 720;
+        const menu = guide.locator(mobileMenu ? '.tutorial-jump' : '.tutorial-sidebar');
+        for (const chapterId of chaptersByGuide[guideId]) {
+          if (mobileMenu) await activate(menu.locator('summary'));
+          await activate(menu.locator('a[href="#' + chapterId + '"]'));
+          await page.waitForURL(url => url.hash === '#' + chapterId);
+          await settle();
+          if (mobileMenu) assert(!await menu.evaluate(el => el.open), 'mobile chapter menu closes after choosing ' + chapterId);
+          assert.equal(await page.evaluate(() => document.activeElement.id), chapterId, 'chapter receives keyboard focus');
+          const chapter = await page.locator('#' + chapterId).boundingBox();
+          const header = await page.locator('.site-header').boundingBox();
+          assert(chapter.y >= header.height - 2 && chapter.y < height / 2, chapterId + ' heading remains below the sticky header');
+          await assertSelectedGuide(guideId);
+          if (width === 390 && engineName === 'chromium' && ['delete','jobs-assets','jobs-results','jobs-defects','jobs-favourites'].includes(chapterId)) await page.screenshot({path:'/tmp/hub-tutorial-' + chapterId + '-phone.png'});
+        }
 
-      // A drag which starts inside the picture must not close on the backdrop.
-      if (!touch) {
+        // The screenshot viewer opens by keyboard on desktop and by touch on phones.
+        const opener = guide.locator('.screenshot-link').first();
+        await opener.scrollIntoViewIfNeeded();
+        if (touch) await opener.tap();
+        else {await opener.focus();await page.keyboard.press('Enter')}
+        const viewer = page.locator('#screenshot-viewer');
+        await viewer.waitFor({state:'visible'});
+        await page.waitForFunction(()=>{const image=document.querySelector('#screenshot-image');return image.complete&&image.naturalWidth>0});
+        assert.equal(await page.evaluate(() => document.activeElement.id), 'screenshot-close');
+        assert.equal(await viewer.getAttribute('aria-labelledby'), 'screenshot-caption');
+        for(let i=0;i<7;i++){await page.keyboard.press('Tab');assert(await page.evaluate(()=>document.activeElement===document.body||!!document.activeElement.closest('#screenshot-viewer')),'Tab cannot focus background page controls')}
+        assert((await page.locator('#screenshot-caption').innerText()).length > 10);
+        const fitted = await page.locator('#screenshot-image').boundingBox();
+        const stage = await page.locator('.screenshot-stage').boundingBox();
+        assert(fitted.width <= stage.width + 1 && fitted.height <= stage.height + 1, 'viewer initially fits image');
+        await activate(page.locator('#screenshot-size'));
+        assert.equal(await page.locator('#screenshot-size').getAttribute('aria-pressed'), 'true');
+        const zoomed = await page.locator('#screenshot-image').boundingBox();
+        assert(zoomed.width > fitted.width || zoomed.height > fitted.height, 'Zoom in enlarges actual screenshot');
+        assert(await page.locator('.screenshot-stage').evaluate(el => el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight), 'zoomed screenshot can scroll');
+        await activate(page.locator('#screenshot-size'));
+        assert.equal(await page.locator('#screenshot-size').innerText(), 'Zoom in');
+        assert.equal(await page.locator('#screenshot-size').getAttribute('aria-pressed'), 'false');
+        await noOverflow('Open screenshot dialog');
+        if (width === 390 || width === 1440) await page.screenshot({path:'/tmp/hub-tutorial-viewer-' + guideId + '-' + engineName + '-' + width + '.png'});
+        await activate(page.locator('#screenshot-close'));
+        await viewer.waitFor({state:'hidden'});
+        await page.waitForFunction(()=>!document.querySelector('#screenshot-image').hasAttribute('src'));
+        assert(await opener.evaluate(el => el === document.activeElement), 'Close returns focus to screenshot link');
+        assert.equal(await page.locator('#screenshot-image').getAttribute('src'), null, 'closed viewer releases image');
         await activate(opener);
-        const picture = await page.locator('#screenshot-image').boundingBox();
-        await page.mouse.move(picture.x + picture.width / 2, picture.y + picture.height / 2);
-        await page.mouse.down();await page.mouse.move(2,2,{steps:8});await page.mouse.up();
-        assert(await viewer.isVisible(), 'image-to-backdrop drag does not dismiss');
         await page.keyboard.press('Escape');
+        await viewer.waitFor({state:'hidden'});
+        await page.waitForFunction(()=>!document.querySelector('#screenshot-image').hasAttribute('src'));
+        assert(await opener.evaluate(el => el === document.activeElement), 'Escape returns focus');
+        await activate(opener);
+        // The page edge is outside the dialog for every viewport; test native backdrop hit testing.
+        if (touch) await page.touchscreen.tap(2,2);else await page.mouse.click(2,2);
+        await viewer.waitFor({state:'hidden'});
+        await page.waitForFunction(()=>!document.querySelector('#screenshot-image').hasAttribute('src'));
+        assert(await opener.evaluate(el => el === document.activeElement), 'backdrop dismissal returns focus');
+
+        // A drag which starts inside the picture must not close on the backdrop.
+        if (!touch) {
+          await activate(opener);
+          const picture = await page.locator('#screenshot-image').boundingBox();
+          await page.mouse.move(picture.x + picture.width / 2, picture.y + picture.height / 2);
+          await page.mouse.down();await page.mouse.move(2,2,{steps:8});await page.mouse.up();
+          assert(await viewer.isVisible(), 'image-to-backdrop drag does not dismiss');
+          await page.keyboard.press('Escape');
+        }
+      }
+
+      // Direct loading must reveal the owning guide even when its target starts hidden.
+      for (const [hash, guideId] of [['#delete','zone-sketch'], ['#jobs-assets','jobs'], ['#jobs','jobs'], ['#zone-sketch','zone-sketch']]) {
+        await page.goto(origin + '/tutorials.html' + hash);
+        await assertSelectedGuide(guideId);
+        assert.equal(new URL(page.url()).hash, hash);
+        const target = await page.locator(hash).boundingBox();
+        const header = await page.locator('.site-header').boundingBox();
+        assert(target.y >= header.height - 2 && target.y < height / 2, hash + ' direct link scrolls to its visible target');
       }
       assert.deepEqual(errors, [], 'no script errors at ' + width);
       assert.deepEqual(badLocalResponses, [], 'no missing local guide resources at ' + width);
       await context.close();
-      console.log('PASS ' + engineName + ' ' + width + ': Home navigation, 15 chapters, local images/links, layout, screenshot zoom/fit/dismissal and focus');
+      console.log('PASS ' + engineName + ' ' + width + ': Home navigation, both guides and all chapter links, history/deep links, local images, screenshot zoom/fit/dismissal and focus');
     }
 
     // Existing Update behavior retains caller context while removing only obsolete refresh.
@@ -183,19 +238,31 @@ const chapterIds = ['start','controls','quick-rooms','room-labels','doors','dele
     await context.close();
     console.log('PASS ' + engineName + ': existing Update URL and local asset refresh preserved');
     const plain = await browser.newContext({viewport:{width:390,height:844},javaScriptEnabled:false,reducedMotion:'reduce'});
-    const staticPage = await plain.newPage();await staticPage.goto(origin + '/tutorials.html');
-    assert.equal(await staticPage.locator('.tutorial-chapter').count(),15);
-    await staticPage.locator('.screenshot-link').first().click();await staticPage.waitForURL(/\.webp$/);
-    assert((await staticPage.locator('img').first().getAttribute('src')).includes('.webp'),'without JavaScript screenshot still opens as image');
+    const staticPage = await plain.newPage();
+    for (const guideId of guideIds) {
+      await staticPage.goto(origin + '/tutorials.html#' + guideId);
+      for (const id of guideIds) assert(await staticPage.locator('#' + id).isVisible(), 'without JavaScript both complete guides remain visible');
+      await staticPage.locator('#' + guideId + ' .screenshot-link').first().click();
+      await staticPage.waitForURL(/\.webp$/);
+      assert((await staticPage.locator('img').first().getAttribute('src')).includes('.webp'), 'without JavaScript ' + guideId + ' screenshot opens directly');
+    }
     await plain.close();
-    const printContext=await browser.newContext();const printPage=await printContext.newPage();await printPage.goto(origin+'/tutorials.html');
+    const printContext=await browser.newContext();const printPage=await printContext.newPage();await printPage.goto(origin+'/tutorials.html#jobs-assets');
+    await printPage.waitForFunction(()=>document.querySelector('#zone-sketch').hidden&&!document.querySelector('#jobs').hidden);
     const faq=printPage.locator('.tutorial-faq');assert(await faq.count()>0);
     await faq.first().evaluate(el=>el.open=true);
     const original=await faq.evaluateAll(nodes=>nodes.map(el=>el.open));
-    await printPage.evaluate(()=>window.dispatchEvent(new Event('beforeprint')));assert((await faq.evaluateAll(nodes=>nodes.map(el=>el.open))).every(Boolean),'print exposes FAQ answers');
-    await printPage.emulateMedia({media:'print'});assert(await printPage.locator('.site-header').isHidden());assert(await printPage.locator('#delete').isVisible());
-    await printPage.evaluate(()=>window.dispatchEvent(new Event('afterprint')));assert.deepEqual(await faq.evaluateAll(nodes=>nodes.map(el=>el.open)),original,'printing restores existing FAQ state');
-    await printContext.close();console.log('PASS '+engineName+': no-JavaScript screenshot fallback and printable FAQ content');
+    await printPage.evaluate(()=>window.dispatchEvent(new Event('beforeprint')));
+    assert((await faq.evaluateAll(nodes=>nodes.map(el=>el.open))).every(Boolean),'print exposes FAQ answers from both guides');
+    await printPage.emulateMedia({media:'print'});
+    assert(await printPage.locator('.site-header').isHidden());
+    for(const id of ['zone-sketch','jobs','delete','jobs-assets']) assert(await printPage.locator('#'+id).isVisible(), 'print includes '+id);
+    await printPage.emulateMedia({media:'screen'});
+    await printPage.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
+    assert.deepEqual(await faq.evaluateAll(nodes=>nodes.map(el=>el.open)),original,'printing restores existing FAQ state');
+    assert(await printPage.locator('#zone-sketch').isHidden());assert(await printPage.locator('#jobs').isVisible(),'printing restores app selection');
+    assert.equal(new URL(printPage.url()).hash,'#jobs-assets','printing preserves chapter URL');
+    await printContext.close();console.log('PASS '+engineName+': both no-JavaScript guides, direct screenshot links and print visibility/state restoration');
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
