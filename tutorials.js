@@ -6,14 +6,31 @@
   const header = document.querySelector('.site-header');
   const chapters = [...document.querySelectorAll('.tutorial-chapter[id]')];
   const chapterLinks = [...document.querySelectorAll('.tutorial-toc a[href^="#"]')];
+  const guides = [...document.querySelectorAll('.tutorial-guide[id]')];
+  const guideLinks = [...document.querySelectorAll('[data-guide-link]')];
   let scrollFrame = 0;
+
+  const selectGuide = () => {
+    let target = null;
+    try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch { /* Invalid fragments fall back to the first guide. */ }
+    const selected = target?.closest('.tutorial-guide') || guides.find(guide => !guide.hidden) || guides[0];
+    const revealing = selected?.hidden;
+    for (const guide of guides) guide.hidden = guide !== selected;
+    for (const link of guideLinks) {
+      if (link.dataset.guideLink === selected?.id) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
+    }
+    if (revealing && target) requestAnimationFrame(() => target.scrollIntoView({block: 'start'}));
+    queueChapter();
+  };
 
   const activeChapter = () => {
     scrollFrame = 0;
-    if (!chapters.length) return;
+    const visibleChapters = chapters.filter(chapter => !chapter.closest('.tutorial-guide')?.hidden);
+    if (!visibleChapters.length) return;
     const threshold = (header?.getBoundingClientRect().height || 0) + 40;
-    let active = chapters[0];
-    for (const chapter of chapters) {
+    let active = visibleChapters[0];
+    for (const chapter of visibleChapters) {
       if (chapter.getBoundingClientRect().top <= threshold) active = chapter;
       else break;
     }
@@ -34,6 +51,8 @@
   if (header && 'ResizeObserver' in window) new ResizeObserver(measureHeader).observe(header);
   window.addEventListener('resize', measureHeader, {passive: true});
   window.addEventListener('scroll', queueChapter, {passive: true});
+  window.addEventListener('hashchange', selectGuide);
+  selectGuide();
   measureHeader();
 
   for (const link of chapterLinks) {
@@ -55,13 +74,19 @@
   }
 
   let printOpened = [];
+  let printHiddenGuides = [];
   window.addEventListener('beforeprint', () => {
+    printHiddenGuides = guides.filter(guide => guide.hidden);
+    for (const guide of printHiddenGuides) guide.hidden = false;
     printOpened = [...document.querySelectorAll('.tutorial-faq:not([open])')];
     for (const item of printOpened) item.open = true;
   });
   window.addEventListener('afterprint', () => {
     for (const item of printOpened) item.open = false;
     printOpened = [];
+    for (const guide of printHiddenGuides) guide.hidden = true;
+    printHiddenGuides = [];
+    queueChapter();
   });
 
   const viewer = document.getElementById('screenshot-viewer');
