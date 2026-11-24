@@ -4,16 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#080d13">
-  <meta name="description" content="Learn Zone Sketch, Jobs and FINDR with step-by-step screenshots: drawings, site visits, assets, certificates, manuals, Panel Pals and practice tools.">
+  <meta name="description" content="Learn Zone Sketch, Jobs and FINDR one small task at a time. Guided actions, real screenshots, optional help and saved progress.">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Zone Sketch, Jobs and FINDR tutorials | Fire & Security App Hub">
-  <meta property="og:description" content="Practical beginner guides with real screenshots. Draw plans, organise visits, save manuals, use Panel Pals and practise with engineering tools.">
+  <meta property="og:description" content="Short guided tasks with real screenshots. Draw plans, test assets, create certificates and find manuals. Learn at your own pace.">
   <meta property="og:url" content="https://william2535.github.io/FIRE-SECURITY-APP-PORTAL/tutorials.html">
   <title>Zone Sketch, Jobs and FINDR tutorials — Fire & Security App Hub</title>
   <link rel="icon" href="assets/tutorials/zone-sketch-icon.webp">
   <link rel="stylesheet" href="styles.css?v=white-chevron-e8dc15b3">
-  <link rel="stylesheet" href="tutorials.css?v=3">
-  <script src="tutorials.js?v=2" defer></script>
+  <link rel="stylesheet" href="tutorials.css?v=4">
+  <link rel="stylesheet" href="guided-tutorials.css?v=1">
+  <script src="tutorials.js?v=3" defer></script>
+  <script src="tutorial-tasks-zone.js?v=1" defer></script>
+  <script src="tutorial-tasks-jobs.js?v=1" defer></script>
+  <script src="tutorial-tasks-findr.js?v=1" defer></script>
+  <script src="guided-tutorials.js?v=1" defer></script>
 </head>
 <body class="has-tutorials-nav tutorial-page">
 <a class="skip" href="#tutorial-main">Skip to tutorial</a>
@@ -24,7 +29,10 @@
   </div>
 </header>
 <main id="tutorial-main" class="tutorial-shell">
-  <header class="tutorial-hub-intro"><p class="tutorial-eyebrow">APP HUB / TUTORIALS</p><h1>Learn the apps, step by step.</h1><p>Choose a guide. Follow the numbered instructions, practise with example data and tap any screenshot for a closer look.</p></header>
+  <section id="guided-tutorials" hidden aria-label="Guided tutorials"></section>
+  <div id="tutorial-reference">
+  <a id="guided-return" class="guided-reference-return" href="#learn/zone-sketch" hidden>Back to guided tasks</a>
+  <header class="tutorial-hub-intro"><p class="tutorial-eyebrow">APP HUB / TUTORIALS</p><h1>Learn the apps, step by step.</h1><p>Full reference guides. Choose an app, jump to a topic and tap any screenshot for a closer look.</p></header>
   <nav class="tutorial-app-picker" aria-label="Choose an app tutorial"><a href="#zone-sketch" data-guide-link="zone-sketch"><img src="assets/tutorials/zone-sketch-icon.webp" alt="" width="48" height="48"><span><strong>Zone Sketch</strong><small>Buildings, devices, loops and drawings</small></span></a><a href="#jobs" data-guide-link="jobs"><img src="assets/jobs-authentic.webp" alt="" width="48" height="48"><span><strong>Jobs</strong><small>Sites, visits, assets and certificates</small></span></a><a href="#findr" data-guide-link="findr"><img src="assets/tutorials/findr-icon.png" alt="" width="48" height="48"><span><strong>FINDR</strong><small>Manuals, Panel Pals and practice tools</small></span></a></nav>
   <section class="tutorial-guide" id="zone-sketch" aria-labelledby="zone-sketch-title">
   <header class="tutorial-hero">
@@ -735,6 +743,7 @@
         <details><summary>Does Request persistent storage back up my records?</summary><p>No. It asks the browser to protect local storage, and the browser decides. It does not copy your data to another device or a cloud account. Keep the files described in <a href="#findr-backups">Keep a copy</a>.</p></details>
       </section>
 </article></div></section>
+  </div>
 </main>
 <footer class="footer"><div class="shell footer-inner"><span class="footer-brand"><span class="footer-uk-flag" role="img" aria-label="United Kingdom flag">🇬🇧</span><small>FIRE &amp; SECURITY APPS</small></span><span>© 2026 WILL FLOOD</span><a href="#tutorial-main">Back to top</a></div></footer>
 <dialog id="screenshot-viewer" aria-labelledby="screenshot-caption"><header class="screenshot-viewer-toolbar"><p id="screenshot-caption"></p><button type="button" id="screenshot-size">Zoom in</button><button type="button" id="screenshot-close">Close</button></header><div class="screenshot-stage"><img id="screenshot-image" alt=""></div></dialog>
