@@ -26,6 +26,7 @@
 
   const activeChapter = () => {
     scrollFrame = 0;
+    if (document.getElementById('tutorial-reference')?.hidden) return;
     const visibleChapters = chapters.filter(chapter => !chapter.closest('.tutorial-guide')?.hidden);
     if (!visibleChapters.length) return;
     const threshold = (header?.getBoundingClientRect().height || 0) + 40;
@@ -139,18 +140,18 @@
     if (returnFocus?.isConnected) returnFocus.focus({preventScroll: true});
     returnFocus = null;
   });
-  for (const link of document.querySelectorAll('a.screenshot-link[href]')) {
-    link.addEventListener('click', event => {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      returnFocus = link;
-      caption.textContent = link.dataset.caption || link.closest('figure')?.querySelector('figcaption')?.textContent || link.querySelector('img')?.alt || 'Screenshot';
-      image.alt = link.querySelector('img')?.alt || caption.textContent;
-      image.src = link.href;
-      fitImage();
-      viewer.showModal();
-      document.body.classList.add('screenshot-viewer-open');
-      close.focus();
-    });
-  }
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a.screenshot-link[href]');
+    if (!link) return;
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    returnFocus = link;
+    caption.textContent = link.dataset.caption || link.closest('figure')?.querySelector('figcaption')?.textContent || link.querySelector('img')?.alt || 'Screenshot';
+    image.alt = link.querySelector('img')?.alt || caption.textContent;
+    image.src = link.href;
+    fitImage();
+    viewer.showModal();
+    document.body.classList.add('screenshot-viewer-open');
+    close.focus();
+  });
 })();

@@ -65,7 +65,9 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
       assert(await page.locator('#install-overview').evaluate(el => el.open));
       assert.equal(new URL(page.url()).hash, '#install');
       await activate(tutorial);
-      await page.waitForURL('**/tutorials.html');
+      await page.waitForURL(url => url.pathname === '/tutorials.html');
+      // The default is now guided practice. Keep this suite on the full reference.
+      await page.goto(origin + '/tutorials.html#zone-sketch');
       assert.equal(await page.locator('.site-header .portal-tutorials-link').getAttribute('aria-current'), 'page');
       assert.deepEqual(await page.locator('.tutorial-guide[id]').evaluateAll(nodes => nodes.map(node => node.id)), guideIds);
       const chaptersByGuide = Object.fromEntries(await Promise.all(guideIds.map(async id => [id, await page.locator('#' + id + ' .tutorial-chapter[id]').evaluateAll(nodes => nodes.map(node => node.id))])));
@@ -82,8 +84,11 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
         for (const menu of ['.tutorial-sidebar', '.tutorial-jump']) {
           assert.deepEqual(await page.locator('#' + id + ' ' + menu + ' .tutorial-toc a').evaluateAll(nodes => nodes.map(node => node.hash.slice(1))), chaptersByGuide[id], id + ' ' + menu + ' lists every chapter in order');
         }
-        const references = await page.locator('#' + id + ' .tutorial-shot img').evaluateAll(nodes => [...new Set(nodes.map(node => new URL(node.src).pathname.split('/').pop()))].sort());
-        assert.deepEqual(references, screenshotFiles[id], id + ' references every captured screenshot asset');
+        const references = await page.locator('#' + id + ' .tutorial-shot img').evaluateAll((nodes, id) => {
+          const guided = (window.TutorialTasks?.[id] || []).flatMap(task => task.steps.map(step => step.image?.src).filter(Boolean));
+          return [...new Set([...nodes.map(node => node.src), ...guided].map(source => new URL(source, location.href).pathname).filter(source => source.startsWith('/assets/tutorials/' + id + '/')).map(source => source.split('/').pop()))].sort();
+        }, id);
+        assert.deepEqual(references, screenshotFiles[id], id + ' reference or guided tasks use every captured screenshot asset');
       }
       const assertSelectedGuide = async id => {
         await page.waitForFunction(id => [...document.querySelectorAll('.tutorial-guide')].every(guide => guide.hidden === (guide.id !== id)), id);
@@ -118,7 +123,7 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
           assert.equal(response.status(), 200, 'local guide resource resolves: ' + url.href);
           checked.set(url.href, response.headers()['content-type']?.includes('text/html') ? await response.text() : null);
         }
-        if (hash && checked.get(url.href)) {
+        if (hash && !hash.startsWith('learn/') && checked.get(url.href)) {
           const found = await page.evaluate(({html,id}) => !!new DOMParser().parseFromString(html, 'text/html').getElementById(id), {html:checked.get(url.href),id:hash});
           assert(found, 'guide link has a real anchor: ' + resource.url);
         }

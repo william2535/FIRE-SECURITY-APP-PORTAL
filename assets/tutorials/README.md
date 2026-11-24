@@ -125,3 +125,16 @@ Maintenance notes: the current Panel Pal log uses **Download complete report / C
 5. For circuits, route through the practice devices and check completion before capturing. Check the completed drawings and export an editable backup to confirm the project data.
 6. Update WebP files, image dimensions, alt text, captions, this source record and the version/date in `tutorials.html`. Keep images legible when enlarged and small enough for mobile loading.
 7. Run the Chromium and WebKit checks described in the root README, then inspect the phone and desktop page visually.
+
+## Jobs task-guide Timesheets images
+
+The bite-size Jobs tasks reuse two genuine, unmodified PNG captures from the verified local Jobs interface. Both were captured at 430 × 932 CSS pixels with DPR 2 and are 860 × 1864 pixels. They use the fictional **Riverside House — example site / Routine maintenance** job, rather than the earlier Tutorial practice site fixture.
+
+| File | Actual view |
+| --- | --- |
+| `jobs/21-timesheets.png` | Daily Timesheets calendar with a saved Work session, 09:00–11:30, and 2:30 total |
+| `jobs/22-timesheet-entry.png` | The real Edit session form for that same record, including Task / job, Type, Start, Finish and calculated duration |
+
+The PNGs are byte-for-byte copies of `timesheets.png` and `timesheets-entry.png` from the verified premium-film source capture. Its provenance records Home → Timesheets → Add session, selection of the existing fictional job, Type Work, start 24 November 2026 at 09:00, finish at 11:30, and Save session. The saved entry was then reopened for the editor image. No time was submitted to an office or sent externally, and no Jobs source was changed.
+
+The instructions were checked against `src/timesheets-ui.js` and `docs/timesheets.md` in the Jobs checkout. A time session is saved locally; it does not mark a job complete. The existing long Jobs guide has no Timesheets chapter, so the task deliberately omits a chapter reference instead of linking to an unrelated section.
