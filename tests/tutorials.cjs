@@ -20,7 +20,8 @@ const server = http.createServer((request, response) => {
     response.end('Not found');
   }
 });
-const guideIds = ['zone-sketch', 'jobs'];
+const guideIds = ['zone-sketch', 'jobs', 'findr'];
+const findrDeepLinks = ['findr-manuals', 'findr-import', 'findr-panel-pals', 'findr-quizzes'];
 const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSync(path.join(root, 'assets/tutorials', id)).filter(file => /\.(?:webp|png|jpe?g)$/i.test(file)).sort()]));
 
 (async () => {
@@ -69,11 +70,15 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
       assert.deepEqual(await page.locator('.tutorial-guide[id]').evaluateAll(nodes => nodes.map(node => node.id)), guideIds);
       const chaptersByGuide = Object.fromEntries(await Promise.all(guideIds.map(async id => [id, await page.locator('#' + id + ' .tutorial-chapter[id]').evaluateAll(nodes => nodes.map(node => node.id))])));
       const allChapterIds = Object.values(chaptersByGuide).flat();
-      assert.equal(new Set(allChapterIds).size, allChapterIds.length, 'chapter IDs are unique across both apps');
+      assert.equal(new Set(allChapterIds).size, allChapterIds.length, 'chapter IDs are unique across all apps');
       assert(chaptersByGuide['zone-sketch'].includes('delete') && chaptersByGuide['zone-sketch'].includes('asset-organisation'), 'existing Delete anchor and device organisation chapter remain');
       for (const id of ['jobs-assets','jobs-results','jobs-defects','jobs-favourites']) assert(chaptersByGuide.jobs.includes(id), id + ' supports its direct link');
+      for (const id of findrDeepLinks) assert(chaptersByGuide.findr.includes(id), id + ' supports its direct link');
       for (const id of guideIds) {
         assert(chaptersByGuide[id].length > 0, id + ' contains chapters');
+        const choice = page.locator('[data-guide-link="' + id + '"]');
+        const choiceBox = await choice.boundingBox();
+        assert(choiceBox && choiceBox.width >= 44 && choiceBox.height >= 44, id + ' app choice has a comfortable touch target');
         for (const menu of ['.tutorial-sidebar', '.tutorial-jump']) {
           assert.deepEqual(await page.locator('#' + id + ' ' + menu + ' .tutorial-toc a').evaluateAll(nodes => nodes.map(node => node.hash.slice(1))), chaptersByGuide[id], id + ' ' + menu + ' lists every chapter in order');
         }
@@ -119,18 +124,23 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
         }
       }
       // App selection preserves native fragment/history navigation, including old chapter URLs.
-      await selectGuide('jobs');
-      await selectGuide('zone-sketch');
-      await page.goBack();
-      await page.waitForURL(url => url.hash === '#jobs');
-      await assertSelectedGuide('jobs');
-      await page.goForward();
-      await page.waitForURL(url => url.hash === '#zone-sketch');
-      await assertSelectedGuide('zone-sketch');
+      const selectionHistory = [...guideIds.slice(1), guideIds[0]];
+      for (const id of selectionHistory) await selectGuide(id);
+      for (const id of selectionHistory.slice(0, -1).reverse()) {
+        await page.goBack();
+        await page.waitForURL(url => url.hash === '#' + id);
+        await assertSelectedGuide(id);
+      }
+      for (const id of selectionHistory.slice(1)) {
+        await page.goForward();
+        await page.waitForURL(url => url.hash === '#' + id);
+        await assertSelectedGuide(id);
+      }
 
       for (const guideId of guideIds) {
         await selectGuide(guideId);
         const guide = page.locator('#' + guideId);
+        if (guideId === 'findr' && width === 1440 && engineName === 'chromium') await page.screenshot({path:'/tmp/hub-tutorial-findr-desktop.png'});
         for (const image of await guide.locator('.tutorial-shot img').all()) {
           await image.scrollIntoViewIfNeeded();
           await page.waitForFunction(el => el.complete, await image.elementHandle(), {timeout:10000});
@@ -152,7 +162,7 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
           const header = await page.locator('.site-header').boundingBox();
           assert(chapter.y >= header.height - 2 && chapter.y < height / 2, chapterId + ' heading remains below the sticky header');
           await assertSelectedGuide(guideId);
-          if (width === 390 && engineName === 'chromium' && ['delete','jobs-assets','jobs-results','jobs-defects','jobs-favourites'].includes(chapterId)) await page.screenshot({path:'/tmp/hub-tutorial-' + chapterId + '-phone.png'});
+          if (width === 390 && engineName === 'chromium' && (['delete','jobs-assets','jobs-results','jobs-defects','jobs-favourites'].includes(chapterId) || guideId === 'findr')) await page.screenshot({path:'/tmp/hub-tutorial-' + chapterId + '-phone.png'});
         }
 
         // The screenshot viewer opens by keyboard on desktop and by touch on phones.
@@ -209,7 +219,9 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
       }
 
       // Direct loading must reveal the owning guide even when its target starts hidden.
-      for (const [hash, guideId] of [['#delete','zone-sketch'], ['#jobs-assets','jobs'], ['#jobs','jobs'], ['#zone-sketch','zone-sketch']]) {
+      const directLinks = [['#delete','zone-sketch'], ['#jobs-assets','jobs'], ...guideIds.map(id => ['#' + id, id]), ...[...new Set([chaptersByGuide.findr[0], ...findrDeepLinks, chaptersByGuide.findr.at(-1)])].map(id => ['#' + id, 'findr'])];
+      for (const [hash, guideId] of directLinks) {
+        await page.goto('about:blank');
         await page.goto(origin + '/tutorials.html' + hash);
         await assertSelectedGuide(guideId);
         assert.equal(new URL(page.url()).hash, hash);
@@ -220,7 +232,7 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
       assert.deepEqual(errors, [], 'no script errors at ' + width);
       assert.deepEqual(badLocalResponses, [], 'no missing local guide resources at ' + width);
       await context.close();
-      console.log('PASS ' + engineName + ' ' + width + ': Home navigation, both guides and all chapter links, history/deep links, local images, screenshot zoom/fit/dismissal and focus');
+      console.log('PASS ' + engineName + ' ' + width + ': Home navigation, all three guides and chapter links, history/deep links, local images, screenshot zoom/fit/dismissal and focus');
     }
 
     // Existing Update behavior retains caller context while removing only obsolete refresh.
@@ -241,28 +253,31 @@ const screenshotFiles = Object.fromEntries(guideIds.map(id => [id, fs.readdirSyn
     const staticPage = await plain.newPage();
     for (const guideId of guideIds) {
       await staticPage.goto(origin + '/tutorials.html#' + guideId);
-      for (const id of guideIds) assert(await staticPage.locator('#' + id).isVisible(), 'without JavaScript both complete guides remain visible');
-      await staticPage.locator('#' + guideId + ' .screenshot-link').first().click();
-      await staticPage.waitForURL(/\.webp$/);
-      assert((await staticPage.locator('img').first().getAttribute('src')).includes('.webp'), 'without JavaScript ' + guideId + ' screenshot opens directly');
+      for (const id of guideIds) assert(await staticPage.locator('#' + id).isVisible(), 'without JavaScript all complete guides remain visible');
+      const shot = staticPage.locator('#' + guideId + ' .screenshot-link').first();
+      const source = new URL(await shot.getAttribute('href'), staticPage.url()).href;
+      await shot.click();
+      await staticPage.waitForURL(source);
+      assert.equal(new URL(await staticPage.locator('img').first().getAttribute('src'), staticPage.url()).href, source, 'without JavaScript ' + guideId + ' screenshot opens directly');
     }
     await plain.close();
-    const printContext=await browser.newContext();const printPage=await printContext.newPage();await printPage.goto(origin+'/tutorials.html#jobs-assets');
-    await printPage.waitForFunction(()=>document.querySelector('#zone-sketch').hidden&&!document.querySelector('#jobs').hidden);
+    const printContext=await browser.newContext();const printPage=await printContext.newPage();await printPage.goto(origin+'/tutorials.html#findr');
+    await printPage.waitForFunction(()=>[...document.querySelectorAll('.tutorial-guide')].every(guide=>guide.hidden===(guide.id!=='findr')));
     const faq=printPage.locator('.tutorial-faq');assert(await faq.count()>0);
     await faq.first().evaluate(el=>el.open=true);
     const original=await faq.evaluateAll(nodes=>nodes.map(el=>el.open));
     await printPage.evaluate(()=>window.dispatchEvent(new Event('beforeprint')));
-    assert((await faq.evaluateAll(nodes=>nodes.map(el=>el.open))).every(Boolean),'print exposes FAQ answers from both guides');
+    assert((await faq.evaluateAll(nodes=>nodes.map(el=>el.open))).every(Boolean),'print exposes FAQ answers from all guides');
     await printPage.emulateMedia({media:'print'});
     assert(await printPage.locator('.site-header').isHidden());
-    for(const id of ['zone-sketch','jobs','delete','jobs-assets']) assert(await printPage.locator('#'+id).isVisible(), 'print includes '+id);
+    for(const id of [...guideIds,'delete','jobs-assets']) assert(await printPage.locator('#'+id).isVisible(), 'print includes '+id);
+    assert(await printPage.locator('.tutorial-chapter').evaluateAll(nodes=>nodes.every(el=>el.getClientRects().length>0)), 'printing includes every chapter from all three guides');
     await printPage.emulateMedia({media:'screen'});
     await printPage.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
     assert.deepEqual(await faq.evaluateAll(nodes=>nodes.map(el=>el.open)),original,'printing restores existing FAQ state');
-    assert(await printPage.locator('#zone-sketch').isHidden());assert(await printPage.locator('#jobs').isVisible(),'printing restores app selection');
-    assert.equal(new URL(printPage.url()).hash,'#jobs-assets','printing preserves chapter URL');
-    await printContext.close();console.log('PASS '+engineName+': both no-JavaScript guides, direct screenshot links and print visibility/state restoration');
+    for(const id of guideIds) assert.equal(await printPage.locator('#'+id).isVisible(),id==='findr','printing restores FINDR selection and hides other guides');
+    assert.equal(new URL(printPage.url()).hash,'#findr','printing preserves the selected guide URL');
+    await printContext.close();console.log('PASS '+engineName+': all three no-JavaScript guides, direct screenshot links and print visibility/state restoration');
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
