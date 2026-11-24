@@ -68,6 +68,54 @@ All Jobs UI screenshots use 430 × 932 CSS pixels, DPR 2, with local synthetic r
 
 The Zone Sketch naming example is a manual reference, not a verified loop/address assignment. The Jobs import screenshots use the earlier Z1 practice references. Screenshot source data remains synthetic throughout.
 
+## FINDR guide
+
+The 19-chapter FINDR guide documents browser **0.40.2** from `william2535/Findr`, commit `52eb6df0b65713c8dd7f7233d7b3c1b5152e4255`. On 24 November 2026, the public GitHub Pages copies of `version.mjs`, `app.mjs`, `helpers.mjs`, `fess-mocks.mjs` and `toolbox.mjs` matched the checked source byte-for-byte. Browser, direct APK and Google Play builds have separate release identities; this guide does not claim to update an Android package.
+
+The 28 FINDR images are genuine Chromium captures at 430 × 932 CSS pixels, DPR 2, encoded as RGB WebP. All are 860 × 1864 pixels except `22-backup.webp`, a 780 × 458 capture of the actual export section. Page scrolling focuses the relevant controls. `findr-icon.png` is copied from the app's own `public/app/icons/icon-192.png`. No FINDR application source was changed.
+
+The practice library used two real public documents, imported through FINDR's own file picker and matched to its checked catalogue identities:
+
+- [CTEC XFP USER MANUAL](https://www.ukwatchsecurity.co.uk/engineer-manuals/Manuals/CTEC%20XFP%20USER%20MANUAL.pdf), 28 pages; SHA-256 `8c9b2b9ba2cc5f5eaf63fe7971d04379e87b0e552283004e37b9aa3fe26a7822`.
+- [XFP — User manual and log book, historical Rev2](https://www.srsalertfire.ie/uploads/WsOIx2U5/XFPUserManual.pdf); SHA-256 `1710cb3359701fc524a96ed38fc165502b62d4737c0d94d1175ef0466773bc14`.
+
+Manufacturer documents and equipment pictures retain their original ownership and the app's source credits. The PDFs themselves are not included in this repository. The chosen practice pal has the optional historical Rev2 reference saved while two required current manuals remain missing. Its incomplete status is preserved; the guide does not present it as a prepared current installation. The question screenshot is an actual **Manual search · No AI** result with real citations, not a generated AI answer. No provider key, online AI request or local-model download was used.
+
+Fault values are explicitly fictional: the practice log saves 24.2 V DC with a note that it is not a real measurement. The support handover leaves model verification and restoration unconfirmed. The panel-schedule example is the app's bundled labelled synthetic CSV, with panel A selected. The battery example calculates 6.25 Ah from 250 mA standby for 24 hours plus 500 mA alarm for 30 minutes, factor 1; it is not a compliance claim. The actual pal JSON export includes one selected saved PDF and excludes the shared model. No report, email or support call was sent.
+
+| File in `findr/` | Actual view |
+| --- | --- |
+| `01-home.webp` | Home, navigation and compact view |
+| `02-manual-search.webp` | XFP manual search with saved and unsaved results |
+| `03-saved-pdfs.webp` | Two saved documents and Read controls |
+| `04-pdf-reader.webp` | Actual PDF reader, page 1 of 28 |
+| `05-panel-pictures.webp` | XFP panel-picture results and Compare controls |
+| `06-device-pictures.webp` | Apollo XP95 Optical device references |
+| `07-wiring.webp` | Reviewed Protec wiring picture and source edition |
+| `08-local-resources.webp` | Actual pending app/PDF/OCR/model states |
+| `09-create-panel-pal.webp` | XFP pal manual-selection form |
+| `10-manual-answer.webp` | Actual question and manual-only response |
+| `10b-citations.webp` | Expanded Sources with historical Rev2 and PDF page 13 |
+| `11-answer-modes.webp` | Manual search / Offline AI / Online AI dialog |
+| `12-fault-question.webp` | Isolator observation with Yes / No / I don't know |
+| `13-fault-results.webp` | Insufficient-evidence hypotheses, unconfirmed |
+| `14-emulator-library.webp` | Fire-panel training library |
+| `15-emulator-hints.webp` | Nano guided lesson, step 2 coach |
+| `16-menu-map.webp` | Galaxy Dimension walk-test menu search |
+| `17-toolbox.webp` | Actual 6.25 Ah calculation and assumptions |
+| `18-resistor-lab.webp` | Two 2.2 kΩ resistors in parallel, nominal 1.1 kΩ |
+| `19-quiz-question.webp` | Actual subject-quiz question and answer |
+| `20-quiz-results.webp` | 3/6 first time and 6/6 after corrections |
+| `21-full-paper.webp` | Actual running 60-minute practice paper |
+| `22-backup.webp` | Export helper with Include saved PDFs checked |
+| `23-update.webp` | Actual update check and current version |
+| `24-import-schedule.webp` | Synthetic CSV lookup: panel A, L1 D37, reception |
+| `25-fault-log.webp` | Saved fictional 24.2 V DC reading |
+| `26-call-handover.webp` | Actual support-call notes, unresolved status |
+| `27-emulator-panel.webp` | Nano front with highlighted left selection key |
+
+Maintenance notes: the current Panel Pal log uses **Download complete report / Copy complete report** and separate call-note exports. Do not substitute the legacy structured-visit export controls. The imported schedule lookup is documented separately from entering context into a Panel Pal; the current legacy Start Fault Finder transition does not transfer that context into a pal. There is no global FINDR backup button. Keep original PDFs and schedule files and use the actual per-pal export scope.
+
 ## Updating screenshots
 
 1. Check the current app source and actual interface before changing instructions.

@@ -11,15 +11,20 @@
 .tutorial-page .tutorial-hub-intro { padding: 42px 0 0; }
 .tutorial-page .tutorial-hub-intro h1 { margin: 0 0 12px; font-size: clamp(30px, 4vw, 48px); line-height: 1.15; color: #f3f8fb; }
 .tutorial-page .tutorial-hub-intro p { color: var(--tutorial-muted); max-width: 760px; }
-.tutorial-page .tutorial-app-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+.tutorial-page .tutorial-app-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
 .tutorial-page .tutorial-app-picker a { display: flex; gap: 14px; align-items: center; min-height: 88px; padding: 16px 20px; border: 1px solid #3b5d71; border-radius: 12px; background: #112535; }
 .tutorial-page .tutorial-app-picker a[aria-current="true"] { border-color: #b0f270; background: #203b2b; box-shadow: inset 0 0 0 1px #b0f270; }
+.tutorial-page .tutorial-app-picker a[data-guide-link="jobs"][aria-current="true"] { border-color: #70d9f2; background: #143348; box-shadow: inset 0 0 0 1px #70d9f2; }
+.tutorial-page .tutorial-app-picker a[data-guide-link="findr"][aria-current="true"] { border-color: #ffdf35; background: #343014; box-shadow: inset 0 0 0 1px #ffdf35; }
 .tutorial-page .tutorial-app-picker img { width: 48px; height: 48px; object-fit: contain; flex: none; }
 .tutorial-page .tutorial-app-picker strong, .tutorial-page .tutorial-app-picker small { display: block; }
 .tutorial-page .tutorial-app-picker strong { color: #f3f8fb; font-size: 20px; }
 .tutorial-page .tutorial-app-picker small { color: #bed0dd; font-size: 14px; line-height: 1.45; }
 .tutorial-page .tutorial-guide { scroll-margin-top: calc(var(--tutorial-header-height) + 24px); }
 .tutorial-page .tutorial-guide[hidden] { display: none !important; }
+.tutorial-page #findr .tutorial-eyebrow, .tutorial-page #findr .chapter-tag { color: #ffe574; }
+.tutorial-page #findr .tutorial-toc a[aria-current="location"] { color: #fff19c; border-left-color: #ffdf35; background: #302c18; }
+.tutorial-page #findr .tutorial-hero { background: radial-gradient(ellipse at 85% 15%, #7c681524, transparent 60%); }
 .tutorial-page .tutorial-hero { position: relative; padding: 64px 0 48px; border-bottom: 1px solid var(--tutorial-border); background: radial-gradient(ellipse at 85% 15%, #12475c30, transparent 60%); }
 .tutorial-page .tutorial-eyebrow, .tutorial-page .chapter-tag { display: block; margin-bottom: 14px; color: #8fdfec; font-size: 13px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
 .tutorial-page .tutorial-title { max-width: 1000px; margin: 0 0 24px; font-size: clamp(40px, 5.7vw, 72px); font-weight: 800; line-height: 1.08; letter-spacing: -.045em; text-wrap: balance; }
@@ -125,6 +130,7 @@
  .has-tutorials-nav .site-header .portal-navigation > a { min-height: 44px; font-size: 14px; }
  .tutorial-page { font-size: 17px; }
  .tutorial-page .tutorial-shell { width: calc(100% - 36px); }
+ .tutorial-page .tutorial-app-picker { grid-template-columns: 1fr; }
  .tutorial-page .tutorial-hero { padding: 36px 0 30px; }
  .tutorial-page .tutorial-title { font-size: clamp(36px, 9.2vw, 54px); margin-bottom: 20px; }
  .tutorial-page .tutorial-meta { font-size: 15px; }
@@ -148,8 +154,8 @@
  .tutorial-page .screenshot-stage { padding: 8px; }
 }
 @media (max-width: 480px) {
- .tutorial-page .tutorial-app-picker { gap: 10px; }
- .tutorial-page .tutorial-app-picker a { flex-direction: column; align-items: flex-start; padding: 14px; gap: 8px; }
+ .tutorial-page .tutorial-app-picker { grid-template-columns: 1fr; gap: 10px; }
+ .tutorial-page .tutorial-app-picker a { flex-direction: row; align-items: center; padding: 14px; gap: 14px; }
  .tutorial-page .tutorial-app-picker img { width: 38px; height: 38px; }
  .tutorial-page .tutorial-app-picker strong { font-size: 18px; }
  .tutorial-page .shot-pair { grid-template-columns: 1fr; }
