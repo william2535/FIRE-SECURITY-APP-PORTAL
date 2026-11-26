@@ -31,3 +31,7 @@ The new tablet spacing, shared banners and save-offline swipe-dismiss lines desc
 ## Deliberate exclusion
 
 Zone Sketch's `7468031783e86267bc87d0d9bab73d780dde7933` adds a searchable symbol library in source. Its public Pages homepage still shows the beta closure, and its Android/four-system workflows did not complete successfully. It is therefore omitted from the published-feature news rather than represented as an available new app release.
+
+## Same-day Jobs 1.1.2 follow-up
+
+The Jobs entry now includes opaque black dark-mode surfaces and fading blue banner accents. This is a website styling update on the same release branch; the ordinary light palette, save/recovery flow and content colours are preserved. Battery savings are not quantified or promised. The detailed release checks are recorded in Jobs `docs/black-theme-1.1.2.md`.
