@@ -48,3 +48,19 @@ The new news entry describes the bounded Protec 6500 learning exercise in FINDR 
 - Hints, autosaved exercise state, evidence-log export and restoration checks are present in the implementation. The news does not promise a complete 6500 emulator, a real “Split Loop” menu, a live panel connection, preinstalled PDF bytes or commissioning approval.
 
 The new entry links directly to `https://william2535.github.io/Findr/app/#panel-lab/loops`. Existing Jobs 1.1.2, FINDR 0.41.0 and other news entries remain unchanged.
+
+
+## FINDR 0.43.0 follow-up
+
+This entry accompanies FINDR web 0.43.0 source commit [fbce139](https://github.com/william2535/Findr/commit/fbce139244d0ba25dd9fb783a2f0582fadb9b231). The Site 96 deployment succeeded at 22:54 UTC on 26 November 2026 before this news publication. This does not announce an Android release. Browser verification used Chromium 154 and WebKit 27.2, including offline checks and a synthetic OCR fixture; physical-device photographs have not yet been verified.
+
+The source inspected is the implementation in `public/app/loop-field-log.mjs`, `loop-field-model.mjs`, `loop-field-store.mjs`, `loop-photo-import.mjs` and `loop-photo-parser.mjs`, integrated by `public/app/panel-lab.mjs`. The evidence review is `research/loop-field-0.43.0/field-evidence-scope.md`.
+
+- **Site investigation** is an engineer-entered evidence record, reached through **Panel Lab → Loop diagnostics → Site investigation**. The direct route is `#panel-lab/loop-log`; `#panel-lab/loops` continues to open the separate synthetic Practise exercise. Multiple site jobs keep their own equipment identity, observations, photos and saved history.
+- Photo OCR runs locally using the installed OCR resources. Proposed rows require review against the original image and explicit confirmation before they become confirmed devices. An OCR confidence score is not confirmation. Unreadable or partial rows remain subject to manual review.
+- Map groups remain distinct from site-confirmed physical sections. The existing Protec source limitations still apply: tied or missing Map values do not establish exact cable order.
+- The log records actual entered missed-reply counters, reset state, time interval, checked operating conditions and device coverage. Optional observed polls require their own source and definition; the app must not invent polling totals or treat a smaller counter as proof of repair.
+- Corrections retain history and flag affected observations for review. Impairments remain in the handover until restoration evidence is recorded. JSON export includes the evidence record and handover, but explicitly excludes photo-file bytes; original photos remain locally stored.
+- Offline capability depends on a cached app shell and downloaded OCR resources. The news does not claim an online model, live panel telemetry or control, a complete panel emulator, automatic cause confirmation, or a new native APK.
+
+The existing FINDR 0.42.0, FINDR 0.41.0, Jobs 1.1.2 and other news entries are preserved unchanged.
