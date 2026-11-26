@@ -1,0 +1,105 @@
+/* Keep the existing artwork, links and Info view. These rules only size the
+   three app cards and their controls across phones, tablets and desktop. */
+@media (min-width:701px) {
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-grid {
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    align-items:stretch!important;
+    gap:18px!important;
+  }
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-card {
+    display:flex!important;
+    flex-direction:column!important;
+    grid-column:auto!important;
+    min-width:0!important;
+    width:100%!important;
+    height:auto!important;
+    padding:0!important;
+  }
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-visual {
+    flex:0 0 auto!important;
+    height:190px!important;
+    min-height:190px!important;
+    max-height:none!important;
+    padding:20px!important;
+  }
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-card:is(.findr,.jobs) .app-visual {
+    background-size:contain!important;
+  }
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-body {
+    flex:1 1 auto!important;
+    min-width:0!important;
+    padding:22px!important;
+  }
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-card.jobs {
+    grid-column:1/-1!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  }
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-card.jobs .app-visual {
+    height:240px!important;
+    min-height:240px!important;
+    align-self:center!important;
+  }
+  body.has-tutorials-nav #apps .app-actions>a:is(.zone-banner-link,.findr-banner-link,.jobs-banner-link) {
+    width:100%!important;
+    max-width:440px!important;
+    min-height:44px!important;
+    height:auto!important;
+  }
+  body.has-tutorials-nav #apps .app-actions>a.group-link {
+    max-width:100%;
+    min-height:44px;
+    white-space:normal;
+    text-align:center;
+  }
+  body.has-tutorials-nav #apps .app-actions>.experimental {
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+  body.has-tutorials-nav #apps .app-body .experimental .text-link {
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    white-space:normal;
+    max-width:100%;
+  }
+}
+@media (min-width:1100px) {
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-grid {
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-card.jobs {
+    grid-column:auto!important;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  body.has-tutorials-nav #apps:not(.portal-list-mode) .app-card.jobs .app-visual {
+    height:190px!important;
+    min-height:190px!important;
+  }
+}
+@media (max-width:700px) {
+  /* The two printed artwork buttons are smaller than a fingertip on phones.
+     Extend the transparent hit areas upwards, keeping the same artwork/URLs. */
+  body.has-tutorials-nav.portal-compact-grid #apps .app-grid>.app-card:is(.zone,.findr) .app-actions {
+    height:44px!important;
+    min-height:44px!important;
+    bottom:4%!important;
+  }
+  body.has-tutorials-nav.portal-compact-grid #apps .app-grid>.app-card:is(.zone,.findr) .app-actions>a:is(.zone-banner-link,.findr-banner-link,.grid-free-test) {
+    height:44px!important;
+    min-height:44px!important;
+  }
+  body.has-tutorials-nav.portal-compact-grid #apps .app-grid>.app-card.jobs .app-actions {
+    min-height:44px!important;
+    align-items:stretch!important;
+  }
+  body.has-tutorials-nav.portal-compact-grid #apps .app-grid>.app-card.jobs .app-actions>a:is(.jobs-banner-link,.grid-free-test) {
+    height:44px!important;
+    min-height:44px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+}
