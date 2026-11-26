@@ -35,3 +35,16 @@ Zone Sketch's `7468031783e86267bc87d0d9bab73d780dde7933` adds a searchable symbo
 ## Same-day Jobs 1.1.2 follow-up
 
 The Jobs entry now includes opaque black dark-mode surfaces and fading blue banner accents. This is a website styling update on the same release branch; the ordinary light palette, save/recovery flow and content colours are preserved. Battery savings are not quantified or promised. The detailed release checks are recorded in Jobs `docs/black-theme-1.1.2.md`.
+
+
+## Same-day FINDR 0.42.0 follow-up
+
+The new news entry describes the bounded Protec 6500 learning exercise in FINDR `public/app/protec-loop-engine.mjs` and `public/app/protec-loop-lab.mjs`, with its source audit in `research/protec6500-loop-lab/SOURCE-AUDIT.md`. This entry accompanies FINDR web 0.42.0 source commit [9537e0f](https://github.com/william2535/Findr/commit/9537e0fc78d6864c9cacb4e9ce90a027568478cf), verified before this news update. No Android release is claimed.
+
+- The three implemented scenarios are **Mapped loop**, **Intermittent replies** and **Incomplete map**. Their survey, virtual section controls and per-device readings are synthetic training data, not readings from installed equipment.
+- Map groups are approximate isolator-based positions. Tied or missing Map values do not establish cable order; the exercise supplies a separate fictional survey where an exact route is needed.
+- Each observation advances one simulated hour. The exercise compares repeated equal windows and polling coverage, keeps previous snapshots when counters reset, and requires a restored whole-loop observation before completion. Lower totals, a quiet window or a completed lesson do not confirm a repair.
+- Runtime menu citations identify **Protec Algo-Tec 6500/6600 Commissioning Manual RDM0002/2_4**, dated 11 December 2017, existing Manual Archives record `protec-aee99ea8ed2b`; checked references include allocation/Map at PDF p10 and Loop Info at PDF pp20–21. The source audit also records X600 map-node definitions. Current firmware parity is not claimed.
+- Hints, autosaved exercise state, evidence-log export and restoration checks are present in the implementation. The news does not promise a complete 6500 emulator, a real “Split Loop” menu, a live panel connection, preinstalled PDF bytes or commissioning approval.
+
+The new entry links directly to `https://william2535.github.io/Findr/app/#panel-lab/loops`. Existing Jobs 1.1.2, FINDR 0.41.0 and other news entries remain unchanged.
